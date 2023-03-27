@@ -1,10 +1,3 @@
-//
-//  SceneDelegate.swift
-//  Minimal Fitness
-//
-//  Created by Harsha Amarasinghe on 2023-03-27.
-//
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -17,7 +10,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         
-        let navigationalController = UINavigationController(rootViewController: ViewController())
+        let navigationalController = UINavigationController(rootViewController: signIn())
         window.rootViewController = navigationalController
         self.window = window
         self.window?.makeKeyAndVisible()
