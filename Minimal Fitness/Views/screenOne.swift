@@ -54,7 +54,7 @@ class screenOne: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         label.textColor = UIColor(red: 191/255, green: 195/255, blue: 195/255, alpha: 1.0)
-        label.text = "Already have account?"
+        label.text = "Already have an account?"
         label.textAlignment = .center
         return label
     }()
