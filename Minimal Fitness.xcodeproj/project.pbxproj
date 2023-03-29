@@ -12,6 +12,8 @@
 		56375CC329D17B4A0024F608 /* screenOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56375CC229D17B4A0024F608 /* screenOne.swift */; };
 		56375CC829D17B4B0024F608 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56375CC729D17B4B0024F608 /* Assets.xcassets */; };
 		56375CCB29D17B4B0024F608 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56375CC929D17B4B0024F608 /* LaunchScreen.storyboard */; };
+		5689FADD29D2CB4E0051B448 /* signup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689FADC29D2CB4E0051B448 /* signup.swift */; };
+		5689FAE129D314580051B448 /* viewGender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689FAE029D314580051B448 /* viewGender.swift */; };
 		569D1CCB29D1C9430069B835 /* signIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D1CCA29D1C9430069B835 /* signIn.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +37,8 @@
 		56375CDE29D18D4A0024F608 /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
 		56375CDF29D18D4A0024F608 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		56375CE029D18D4A0024F608 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		5689FADC29D2CB4E0051B448 /* signup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signup.swift; sourceTree = "<group>"; };
+		5689FAE029D314580051B448 /* viewGender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewGender.swift; sourceTree = "<group>"; };
 		569D1CCA29D1C9430069B835 /* signIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signIn.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,6 +87,8 @@
 			children = (
 				56375CC229D17B4A0024F608 /* screenOne.swift */,
 				569D1CCA29D1C9430069B835 /* signIn.swift */,
+				5689FADC29D2CB4E0051B448 /* signup.swift */,
+				5689FAE029D314580051B448 /* viewGender.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -187,6 +193,8 @@
 			files = (
 				56375CC329D17B4A0024F608 /* screenOne.swift in Sources */,
 				56375CBF29D17B4A0024F608 /* AppDelegate.swift in Sources */,
+				5689FADD29D2CB4E0051B448 /* signup.swift in Sources */,
+				5689FAE129D314580051B448 /* viewGender.swift in Sources */,
 				56375CC129D17B4A0024F608 /* SceneDelegate.swift in Sources */,
 				569D1CCB29D1C9430069B835 /* signIn.swift in Sources */,
 			);

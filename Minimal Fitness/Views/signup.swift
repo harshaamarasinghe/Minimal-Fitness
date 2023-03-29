@@ -1,14 +1,21 @@
+//
+//  signup.swift
+//  Minimal Fitness
+//
+//  Created by Harsha Amarasinghe on 2023-03-28.
+//
+
 import UIKit
 
-class signIn: UIViewController {
+class signup: UIViewController {
 
     //UI Comps
-    
+
     let labelOne : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 36, weight: .thin)
-        label.text = "Welcome back"
+        label.text = "Welcome"
         label.textAlignment = .center
         return label
     }()
@@ -18,13 +25,13 @@ class signIn: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         label.textColor = UIColor(red: 191/255, green: 195/255, blue: 195/255, alpha: 1.0)
-        label.text = "Let’s build again!"
+        label.text = "Let’s set goals!"
         label.textAlignment = .center
         return label
     }()
     
     let imageSI: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "signin"))
+        let imageView = UIImageView(image: UIImage(named: "signup"))
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -34,7 +41,7 @@ class signIn: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 40, weight: .thin)
-        label.text = "Sign in"
+        label.text = "Sign up"
         label.textAlignment = .center
         return label
     }()
@@ -67,7 +74,7 @@ class signIn: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         label.textColor = UIColor(red: 191/255, green: 195/255, blue: 195/255, alpha: 1.0)
-        label.text = "Don't have an account?"
+        label.text = "Have an account?"
         label.textAlignment = .center
         return label
     }()
@@ -75,7 +82,7 @@ class signIn: UIViewController {
     let buttonSU : UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Sign up", for: .normal)
+        button.setTitle("Sign in", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
         button.backgroundColor = .white
         button.setTitleColor(.black, for: .normal)
