@@ -79,7 +79,7 @@ class signup: UIViewController {
         return label
     }()
     
-    let buttonSU : UIButton = {
+    let buttonSI : UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Sign in", for: .normal)
@@ -114,9 +114,14 @@ class signup: UIViewController {
         view.addSubview(buttonApple)
         
         hStack.addArrangedSubview(labelFour)
-        hStack.addArrangedSubview(buttonSU)
+        hStack.addArrangedSubview(buttonSI)
         
         view.addSubview(hStack)
+        
+        //button actions
+        
+        buttonSI.addTarget(self, action: #selector(getSignIn), for: .touchUpInside)
+        buttonGoogle.addTarget(self, action: #selector(getGender), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             labelOne.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -155,5 +160,15 @@ class signup: UIViewController {
         ])
     }
     
+    //button action
     
+    @objc func getGender(){
+        let vc = viewGender()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func getSignIn(){
+        let vc = signIn()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }

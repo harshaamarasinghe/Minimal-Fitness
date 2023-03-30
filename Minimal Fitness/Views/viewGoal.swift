@@ -1,16 +1,23 @@
+//
+//  viewGoal.swift
+//  Minimal Fitness
+//
+//  Created by Harsha Amarasinghe on 2023-03-30.
+//
+
 import UIKit
 
-class viewAge: UIViewController {
+class viewGoal: UIViewController {
     
     //Var
     
-    var age : String = ""
+    var goal : String = ""
     
     //UI Comps
     
     let progressView : UIProgressView = {
         let progressView = UIProgressView(progressViewStyle: .bar)
-        progressView.setProgress(2/6, animated: true)
+        progressView.setProgress(6/6, animated: true)
         progressView.trackTintColor = UIColor(red: 217/255, green: 217/255, blue: 217/255, alpha: 1.0)
         progressView.progressTintColor = UIColor(red: 69/255, green: 90/255, blue: 100/255, alpha: 1.0)
         return progressView
@@ -21,7 +28,7 @@ class viewAge: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         label.textColor = UIColor(red: 140/255, green: 140/255, blue: 140/255, alpha: 1.0)
-        label.text = "Step 2/6"
+        label.text = "Step 6/6"
         label.textAlignment = .center
         return label
     }()
@@ -39,13 +46,13 @@ class viewAge: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 36, weight: .thin)
-        label.text = "your age?"
+        label.text = "your goal?"
         label.textAlignment = .center
         return label
     }()
     
-    let imageAge: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "age"))
+    let image : UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "goal"))
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -64,24 +71,50 @@ class viewAge: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 36, weight: .thin)
-        label.text = "Am"
+        label.text = "Want"
         label.textAlignment = .center
         return label
     }()
     
-    let textField : UITextField = {
-        let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.borderStyle = .roundedRect
-        textField.placeholder = "25"
-        textField.textAlignment = .center
-        textField.keyboardType = .numberPad
-        textField.font = .systemFont(ofSize: 36, weight: .semibold)
-        textField.backgroundColor = .white
-        textField.layer.borderWidth = 1.0
-        textField.layer.cornerRadius = 10
-        textField.textColor = .black
-        return textField
+    let labelSix : UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: 36, weight: .thin)
+        label.text = "To"
+        label.textAlignment = .center
+        return label
+    }()
+    
+    let buttonLoose : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Loose weight", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 26, weight: .light)
+        button.layer.borderWidth = 1.0
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.cornerRadius = 10
+        return button
+    }()
+    
+    let buttonGain : UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Gain muscles", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 26, weight: .light)
+        button.layer.borderWidth = 1.0
+        button.backgroundColor = .white
+        button.setTitleColor(.black, for: .normal)
+        button.layer.cornerRadius = 10
+        return button
+    }()
+    
+    let vStack : UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .vertical
+        stack.spacing = 10
+        return stack
     }()
     
     let buttonCont : UIButton = {
@@ -96,7 +129,7 @@ class viewAge: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupUI()
     }
     
@@ -106,21 +139,27 @@ class viewAge: UIViewController {
         view.addSubview(labelOne)
         view.addSubview(labelTwo)
         view.addSubview(labelThree)
-        view.addSubview(imageAge)
+        view.addSubview(image)
         view.addSubview(labelFour)
         view.addSubview(labelFive)
-        view.addSubview(textField)
+        view.addSubview(labelSix)
+        
+        vStack.addArrangedSubview(buttonLoose)
+        vStack.addArrangedSubview(buttonGain)
+        
+        view.addSubview(vStack)
         view.addSubview(buttonCont)
         
         progressView.frame = CGRect(x: (view.frame.size.width)/8, y: 100, width: view.frame.size.width-100, height: 20)
         
-        //button actions
+        //Button actions
         
-        buttonCont.addTarget(self, action: #selector(getNext), for: .touchUpInside)
+        buttonLoose.addTarget(self, action: #selector(btnL), for: .touchUpInside)
+        buttonGain.addTarget(self, action: #selector(btnG), for: .touchUpInside)
         
         
         //Constraints
-
+        
         NSLayoutConstraint.activate([
             labelOne.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             labelOne.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -136,39 +175,62 @@ class viewAge: UIViewController {
             labelThree.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             labelThree.heightAnchor.constraint(equalToConstant: 40),
             
-            imageAge.topAnchor.constraint(equalTo: labelThree.bottomAnchor, constant: 20),
-            imageAge.heightAnchor.constraint(equalToConstant: 240),
-            imageAge.widthAnchor.constraint(equalToConstant: 240),
-            imageAge.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            image.topAnchor.constraint(equalTo: labelThree.bottomAnchor, constant: 20),
+            image.heightAnchor.constraint(equalToConstant: 240),
+            image.widthAnchor.constraint(equalToConstant: 240),
+            image.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            labelFour.topAnchor.constraint(equalTo: imageAge.bottomAnchor, constant: 20),
+            labelFour.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 12),
             labelFour.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             labelFour.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -180),
             labelFour.heightAnchor.constraint(equalToConstant: 40),
             
-            labelFive.topAnchor.constraint(equalTo: labelFour.bottomAnchor, constant: 10),
+            labelFive.topAnchor.constraint(equalTo: labelFour.bottomAnchor, constant: 20),
             labelFive.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             labelFive.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -180),
             labelFive.heightAnchor.constraint(equalToConstant: 40),
             
-            textField.topAnchor.constraint(equalTo: imageAge.bottomAnchor, constant: 27),
-            textField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 180),
-            textField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -100),
-            textField.heightAnchor.constraint(equalToConstant: 75),
-            textField.widthAnchor.constraint(equalToConstant: 103),
-       
-            buttonCont.topAnchor.constraint(equalTo: labelFive.bottomAnchor, constant: 40),
+            labelSix.topAnchor.constraint(equalTo: labelFive.bottomAnchor, constant: 10),
+            labelSix.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            labelSix.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -180),
+            labelSix.heightAnchor.constraint(equalToConstant: 40),
+            
+            
+            vStack.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 35),
+            vStack.leadingAnchor.constraint(equalTo: labelFive.trailingAnchor, constant: -20),
+            vStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40),
+            
+            buttonCont.topAnchor.constraint(equalTo: labelSix.bottomAnchor, constant: 35),
             buttonCont.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             buttonCont.heightAnchor.constraint(equalToConstant: 50),
             buttonCont.widthAnchor.constraint(equalToConstant: 227),
         ])
     }
     
-    //button action
+    @objc func btnL(){
+        buttonLoose.backgroundColor = UIColor(red: 255/255, green: 114/255, blue: 94/255, alpha: 1.0)
+        buttonGain.backgroundColor = .white
+        
+        buttonLoose.setTitleColor(.white, for: .normal)
+        buttonGain.setTitleColor(.black, for: .normal)
+        
+        buttonLoose.layer.borderWidth = 0
+        buttonGain.layer.borderWidth = 1
+        
+        goal = "Loose weight"
+    }
     
-    @objc func getNext(){
-        let vc = viewWeight()
-        navigationController?.pushViewController(vc, animated: true)
+    @objc func btnG(){
+        buttonLoose.backgroundColor = .white
+        buttonGain.backgroundColor = UIColor(red: 255/255, green: 114/255, blue: 94/255, alpha: 1.0)
+        
+        buttonLoose.setTitleColor(.black, for: .normal)
+        buttonGain.setTitleColor(.white, for: .normal)
+        
+        buttonLoose.layer.borderWidth = 1
+        buttonGain.layer.borderWidth = 0
+        
+        goal = "Gain muscle"
     }
     
 }

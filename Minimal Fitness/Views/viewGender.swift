@@ -141,6 +141,7 @@ class viewGender: UIViewController {
         
         buttonMale.addTarget(self, action: #selector(propMale), for: .touchUpInside)
         buttonFemale.addTarget(self, action: #selector(propFemale), for: .touchUpInside)
+        buttonCont.addTarget(self, action: #selector(getNext), for: .touchUpInside)
         
         //Constraints
         
@@ -214,5 +215,9 @@ class viewGender: UIViewController {
         gender = "Female"
     }
     
+    @objc func getNext(){
+        let vc = viewAge()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 
 }

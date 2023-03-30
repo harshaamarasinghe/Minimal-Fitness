@@ -155,7 +155,7 @@ class viewHeight: UIViewController {
         
         buttonKg.addTarget(self, action: #selector(btnKg), for: .touchUpInside)
         buttonLbs.addTarget(self, action: #selector(btnLbs), for: .touchUpInside)
-        
+        buttonCont.addTarget(self, action: #selector(getNext), for: .touchUpInside)
         
         //Constraints
 
@@ -222,6 +222,11 @@ class viewHeight: UIViewController {
         
         type = "lbs"
     }
+    //button action
     
+    @objc func getNext(){
+        let vc = viewLevel()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 
 }

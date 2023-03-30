@@ -163,7 +163,7 @@ class viewLevel: UIViewController {
         buttonBeginner.addTarget(self, action: #selector(btnB), for: .touchUpInside)
         buttonInter.addTarget(self, action: #selector(btnI), for: .touchUpInside)
         buttonAdv.addTarget(self, action: #selector(btnA), for: .touchUpInside)
-        
+        buttonCont.addTarget(self, action: #selector(getNext), for: .touchUpInside)
         
         //Constraints
 
@@ -263,6 +263,11 @@ class viewLevel: UIViewController {
         level = "Advanced"
     }
     
-
-
+    //button action
+    
+    @objc func getNext(){
+        let vc = viewGoal()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }

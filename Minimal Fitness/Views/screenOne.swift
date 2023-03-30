@@ -96,6 +96,10 @@ class screenOne: UIViewController {
         
         view.addSubview(hStack)
 
+        //button actions
+        buttonGS.addTarget(self, action: #selector(getStarted), for: .touchUpInside)
+        buttonSI.addTarget(self, action: #selector(getSignIn), for: .touchUpInside)
+        
         
         NSLayoutConstraint.activate([
             labelOne.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -131,6 +135,17 @@ class screenOne: UIViewController {
         ])
     }
     
+    //button actions
+    
+    @objc func getStarted(){
+        let vc = signup()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func getSignIn(){
+        let vc = signIn()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
 }
 

@@ -111,6 +111,12 @@ class signIn: UIViewController {
         
         view.addSubview(hStack)
         
+        //button actions
+        
+        buttonSU.addTarget(self, action: #selector(getSignUp), for: .touchUpInside)
+       
+        
+        //constraints
         NSLayoutConstraint.activate([
             labelOne.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             labelOne.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
@@ -148,5 +154,10 @@ class signIn: UIViewController {
         ])
     }
     
+    //button actions
     
+    @objc func getSignUp(){
+        let vc = signup()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
