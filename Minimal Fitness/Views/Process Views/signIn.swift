@@ -153,7 +153,6 @@ class signIn: UIViewController {
             hStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
-    
     //button actions
     
     @objc func getSignUp(){

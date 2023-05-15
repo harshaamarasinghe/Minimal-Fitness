@@ -156,6 +156,7 @@ class viewGoal: UIViewController {
         
         buttonLoose.addTarget(self, action: #selector(btnL), for: .touchUpInside)
         buttonGain.addTarget(self, action: #selector(btnG), for: .touchUpInside)
+        buttonCont.addTarget(self, action: #selector(getNext), for: .touchUpInside)
         
         
         //Constraints
@@ -233,4 +234,8 @@ class viewGoal: UIViewController {
         goal = "Gain muscle"
     }
     
+    @objc func getNext(){
+        let vc = viewBMI()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }

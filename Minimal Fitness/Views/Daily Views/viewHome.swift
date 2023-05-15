@@ -1,14 +1,11 @@
-//
-//  HomeView.swift
-//  Minimal Fitness
-//
-//  Created by Harsha Amarasinghe on 2023-05-11.
-//
-
 import UIKit
+import SnapKit
 
-class HomeView: UIViewController {
 
+class viewHome: UIViewController {
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

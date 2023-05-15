@@ -12,6 +12,8 @@
 		56375CC329D17B4A0024F608 /* screenOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56375CC229D17B4A0024F608 /* screenOne.swift */; };
 		56375CC829D17B4B0024F608 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56375CC729D17B4B0024F608 /* Assets.xcassets */; };
 		56375CCB29D17B4B0024F608 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56375CC929D17B4B0024F608 /* LaunchScreen.storyboard */; };
+		568070472A12125300A9107F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 568070462A12125300A9107F /* SnapKit */; };
+		568070492A12150800A9107F /* viewBMI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568070482A12150800A9107F /* viewBMI.swift */; };
 		5689FADD29D2CB4E0051B448 /* signup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689FADC29D2CB4E0051B448 /* signup.swift */; };
 		5689FAE129D314580051B448 /* viewGender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689FAE029D314580051B448 /* viewGender.swift */; };
 		5689FAE329D429A80051B448 /* viewAge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689FAE229D429A80051B448 /* viewAge.swift */; };
@@ -20,8 +22,7 @@
 		5689FAE929D54F780051B448 /* viewLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689FAE829D54F780051B448 /* viewLevel.swift */; };
 		5689FAEB29D55F5A0051B448 /* viewGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689FAEA29D55F5A0051B448 /* viewGoal.swift */; };
 		569D1CCB29D1C9430069B835 /* signIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569D1CCA29D1C9430069B835 /* signIn.swift */; };
-		56AA714D2A0CBCC300035FA1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AA714C2A0CBCC300035FA1 /* HomeView.swift */; };
-		56AA714F2A0CC25E00035FA1 /* FinalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AA714E2A0CC25E00035FA1 /* FinalView.swift */; };
+		56AA714D2A0CBCC300035FA1 /* viewHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AA714C2A0CBCC300035FA1 /* viewHome.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		56375CDE29D18D4A0024F608 /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
 		56375CDF29D18D4A0024F608 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		56375CE029D18D4A0024F608 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		568070482A12150800A9107F /* viewBMI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewBMI.swift; sourceTree = "<group>"; };
 		5689FADC29D2CB4E0051B448 /* signup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signup.swift; sourceTree = "<group>"; };
 		5689FAE029D314580051B448 /* viewGender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewGender.swift; sourceTree = "<group>"; };
 		5689FAE229D429A80051B448 /* viewAge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewAge.swift; sourceTree = "<group>"; };
@@ -52,8 +54,7 @@
 		5689FAE829D54F780051B448 /* viewLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewLevel.swift; sourceTree = "<group>"; };
 		5689FAEA29D55F5A0051B448 /* viewGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewGoal.swift; sourceTree = "<group>"; };
 		569D1CCA29D1C9430069B835 /* signIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = signIn.swift; sourceTree = "<group>"; };
-		56AA714C2A0CBCC300035FA1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		56AA714E2A0CC25E00035FA1 /* FinalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalView.swift; sourceTree = "<group>"; };
+		56AA714C2A0CBCC300035FA1 /* viewHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewHome.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				568070472A12125300A9107F /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,7 +138,7 @@
 		56AA714A2A0CBC5C00035FA1 /* Daily Views */ = {
 			isa = PBXGroup;
 			children = (
-				56AA714C2A0CBCC300035FA1 /* HomeView.swift */,
+				56AA714C2A0CBCC300035FA1 /* viewHome.swift */,
 			);
 			path = "Daily Views";
 			sourceTree = "<group>";
@@ -153,7 +155,7 @@
 				5689FAE629D548E60051B448 /* viewHeight.swift */,
 				5689FAE829D54F780051B448 /* viewLevel.swift */,
 				5689FAEA29D55F5A0051B448 /* viewGoal.swift */,
-				56AA714E2A0CC25E00035FA1 /* FinalView.swift */,
+				568070482A12150800A9107F /* viewBMI.swift */,
 			);
 			path = "Process Views";
 			sourceTree = "<group>";
@@ -174,6 +176,9 @@
 			dependencies = (
 			);
 			name = "Minimal Fitness";
+			packageProductDependencies = (
+				568070462A12125300A9107F /* SnapKit */,
+			);
 			productName = "Minimal Fitness";
 			productReference = 56375CBB29D17B4A0024F608 /* Minimal Fitness.app */;
 			productType = "com.apple.product-type.application";
@@ -202,6 +207,9 @@
 				Base,
 			);
 			mainGroup = 56375CB229D17B4A0024F608;
+			packageReferences = (
+				568070452A12125300A9107F /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 56375CBC29D17B4A0024F608 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -232,13 +240,13 @@
 				56375CBF29D17B4A0024F608 /* AppDelegate.swift in Sources */,
 				5689FAE729D548E60051B448 /* viewHeight.swift in Sources */,
 				5689FADD29D2CB4E0051B448 /* signup.swift in Sources */,
+				568070492A12150800A9107F /* viewBMI.swift in Sources */,
 				5689FAE329D429A80051B448 /* viewAge.swift in Sources */,
-				56AA714F2A0CC25E00035FA1 /* FinalView.swift in Sources */,
 				5689FAE929D54F780051B448 /* viewLevel.swift in Sources */,
 				5689FAEB29D55F5A0051B448 /* viewGoal.swift in Sources */,
 				5689FAE129D314580051B448 /* viewGender.swift in Sources */,
 				56375CC129D17B4A0024F608 /* SceneDelegate.swift in Sources */,
-				56AA714D2A0CBCC300035FA1 /* HomeView.swift in Sources */,
+				56AA714D2A0CBCC300035FA1 /* viewHome.swift in Sources */,
 				5689FAE529D43E790051B448 /* viewWeight.swift in Sources */,
 				569D1CCB29D1C9430069B835 /* signIn.swift in Sources */,
 			);
@@ -448,6 +456,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		568070452A12125300A9107F /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		568070462A12125300A9107F /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 568070452A12125300A9107F /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 56375CB329D17B4A0024F608 /* Project object */;
 }
