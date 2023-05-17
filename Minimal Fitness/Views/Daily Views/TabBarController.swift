@@ -14,8 +14,8 @@ class TabBarController: UITabBarController {
 
         self.setupTab()
         
-//        self.tabBar.barTintColor = .white
-//        self.tabBar.tintColor = .green
+        self.tabBar.backgroundColor = .white
+        self.tabBar.tintColor = .orange
 //        self.tabBar.unselectedItemTintColor = .purple
     }
     

@@ -9,7 +9,7 @@ import UIKit
 
 class viewGoal: UIViewController {
     
-    //Var
+    //Variables
     
     var goal : String = ""
     
