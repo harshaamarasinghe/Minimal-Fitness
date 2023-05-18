@@ -50,6 +50,7 @@ class viewBMI: UIViewController {
         label.font = .systemFont(ofSize: 36, weight: .thin)
         label.text = "Are"
         label.textAlignment = .center
+        //label.layer.borderColor = 
         return label
     }()
     

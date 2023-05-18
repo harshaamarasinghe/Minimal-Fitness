@@ -39,9 +39,9 @@ class viewHome: UIViewController {
     let labelHello : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 28, weight: .bold)
+        label.font = .systemFont(ofSize: 36, weight: .thin)
         label.textColor = UIColor(red: 89/255, green: 89/255, blue: 89/255, alpha: 1.0)
-        label.text = "Hello"
+        label.text = "Let's thrive"
         label.textAlignment = .center
         return label
     }()

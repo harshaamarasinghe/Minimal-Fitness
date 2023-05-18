@@ -31,6 +31,9 @@
 		56A773B52A13B28A00AA2AB5 /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 56A773B42A13B28A00AA2AB5 /* YouTubePlayerKit */; };
 		56A773B72A13B3D300AA2AB5 /* testview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A773B62A13B3D300AA2AB5 /* testview.swift */; };
 		56A773B92A13DBA800AA2AB5 /* viewExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A773B82A13DBA800AA2AB5 /* viewExercise.swift */; };
+		56A773BF2A15FAAC00AA2AB5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 56A773BE2A15FAAC00AA2AB5 /* FirebaseAuth */; };
+		56A773C12A15FAAC00AA2AB5 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 56A773C02A15FAAC00AA2AB5 /* FirebaseDatabase */; };
+		56A773C32A15FAAC00AA2AB5 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 56A773C22A15FAAC00AA2AB5 /* FirebaseFirestore */; };
 		56AA714D2A0CBCC300035FA1 /* viewHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AA714C2A0CBCC300035FA1 /* viewHome.swift */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +83,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				56A773B52A13B28A00AA2AB5 /* YouTubePlayerKit in Frameworks */,
+				56A773BF2A15FAAC00AA2AB5 /* FirebaseAuth in Frameworks */,
+				56A773C12A15FAAC00AA2AB5 /* FirebaseDatabase in Frameworks */,
+				56A773C32A15FAAC00AA2AB5 /* FirebaseFirestore in Frameworks */,
 				568070472A12125300A9107F /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -205,6 +211,9 @@
 			packageProductDependencies = (
 				568070462A12125300A9107F /* SnapKit */,
 				56A773B42A13B28A00AA2AB5 /* YouTubePlayerKit */,
+				56A773BE2A15FAAC00AA2AB5 /* FirebaseAuth */,
+				56A773C02A15FAAC00AA2AB5 /* FirebaseDatabase */,
+				56A773C22A15FAAC00AA2AB5 /* FirebaseFirestore */,
 			);
 			productName = "Minimal Fitness";
 			productReference = 56375CBB29D17B4A0024F608 /* Minimal Fitness.app */;
@@ -238,6 +247,7 @@
 				568070452A12125300A9107F /* XCRemoteSwiftPackageReference "SnapKit" */,
 				56A773B32A13B28A00AA2AB5 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */,
 				56A773BA2A15509E00AA2AB5 /* XCRemoteSwiftPackageReference "Charts" */,
+				56A773BD2A15FAAC00AA2AB5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 56375CBC29D17B4A0024F608 /* Products */;
 			projectDirPath = "";
@@ -519,6 +529,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		56A773BD2A15FAAC00AA2AB5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -531,6 +549,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 56A773B32A13B28A00AA2AB5 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */;
 			productName = YouTubePlayerKit;
+		};
+		56A773BE2A15FAAC00AA2AB5 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 56A773BD2A15FAAC00AA2AB5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		56A773C02A15FAAC00AA2AB5 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 56A773BD2A15FAAC00AA2AB5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		56A773C22A15FAAC00AA2AB5 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 56A773BD2A15FAAC00AA2AB5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
