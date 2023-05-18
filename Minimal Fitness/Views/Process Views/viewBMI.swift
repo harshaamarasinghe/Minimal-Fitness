@@ -73,7 +73,7 @@ class viewBMI: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 32, weight: .thin)
-        label.text = "Underweight"
+        //label.text = "Underweight"
         label.textAlignment = .center
         label.textColor = .white
         label.backgroundColor = UIColor(red: 1/255, green: 166/255, blue: 170/255, alpha: 1.0)
@@ -95,7 +95,7 @@ class viewBMI: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 28, weight: .regular)
-        label.text = "Gain Muscle"
+        //label.text = "Gain Muscle"
         label.textAlignment = .center
         label.textColor = .white
         label.backgroundColor = UIColor(red: 255/255, green: 114/255, blue: 94/255, alpha: 1.0)
@@ -126,10 +126,14 @@ class viewBMI: UIViewController {
         super.viewDidLoad()
         
         setupUI();
+        buttonStart.addTarget(self, action: #selector(getNext), for: .touchUpInside)
     }
     
     func setupUI(){
         view.backgroundColor = .white
+        
+        calculateBMI()
+        
         view.addSubview(labelOne)
         view.addSubview(labelTwo)
         view.addSubview(image)
@@ -153,7 +157,7 @@ class viewBMI: UIViewController {
         //Button actions
         
         
-    
+        
         
         //Constraints
         
@@ -181,24 +185,94 @@ class viewBMI: UIViewController {
         labelFive.snp.makeConstraints { make in
             make.size.equalTo(CGSize(width: 200, height: 100))
         }
-
+        
         hStack.snp.makeConstraints { make in
             make.top.equalTo(hStackMid.snp.bottom).offset(50)
             //make.centerX.equalTo(view)
             make.left.equalTo(view.safeAreaLayoutGuide.snp.left).offset(60)
         }
-
+        
         labelSeven.snp.makeConstraints { make in
             make.size.equalTo(CGSize(width: 200, height: 50))
         }
-
+        
         buttonStart.snp.makeConstraints { make in
             make.top.equalTo(hStack.snp.bottom).offset(60)
             //make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
             make.centerX.equalTo(view)
             make.size.equalTo(CGSize(width: 227, height: 50))
         }
-            
-    
+        
+        
     }
+    
+    func calculateBMI(){
+        let data = UserDefaults.standard
+        
+        let weight = Double(data.integer(forKey: "Weight"))
+        let height = Double(data.integer(forKey: "Height"))
+        
+        let bmi = (weight/height/height)*10000
+        
+        let bmiDouble = Double(bmi)
+        
+        print(weight, height, bmi, bmiDouble)
+        
+        if(bmiDouble<18.5){
+            labelFive.text = "Underweight"
+            labelSeven.text = "Gain Muscle"
+        } else if bmiDouble < 25 {
+            labelFive.text = "Normal Weight"
+            labelSeven.text = "Gain Muscle"
+        } else if bmiDouble < 30 {
+            labelFive.text = "Overweight"
+            labelSeven.text = "Lose Weight"
+        } else {
+            labelFive.text = "Obese"
+            labelSeven.text = "Lose Weight"
+        }
+    }
+    
+    @objc func getNext() {
+        
+      
+        
+        let tabBarController = UITabBarController()
+        
+        
+        
+        let home = UINavigationController(rootViewController: viewHome())
+        let schedule = UINavigationController(rootViewController: viewSchedule())
+        let progress = UINavigationController(rootViewController: viewProgress())
+        let profile = UINavigationController(rootViewController: viewProfile())
+        
+        home.title = "Home"
+        schedule.title = "Schedule"
+        progress.title = "Progress"
+        profile.title = "Profile"
+        
+        tabBarController.setViewControllers([home,schedule,progress,profile], animated: false)
+        
+        guard let items = tabBarController.tabBar.items else {
+            return
+        }
+        
+        let images = ["house","calendar","chart.xyaxis.line","person.crop.circle"]
+    
+        for x in 0..<items.count {
+            items[x].image = UIImage(systemName: images[x])
+            items[x].badgeColor = UIColor.orange
+        }
+        
+        let tabBarAppearance = UITabBar.appearance()
+        tabBarAppearance.backgroundColor = .white
+        tabBarAppearance.tintColor = .orange
+        
+        tabBarController.modalPresentationStyle = .fullScreen
+        present(tabBarController, animated: true)
+        
+    }
+    
+   
+    
 }

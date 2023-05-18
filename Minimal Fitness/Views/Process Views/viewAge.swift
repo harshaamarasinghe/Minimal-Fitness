@@ -4,7 +4,7 @@ class viewAge: UIViewController {
     
     //Var
     
-    var age : String = ""
+    var age : Int = 0
     
     //UI Comps
     
@@ -96,7 +96,7 @@ class viewAge: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupUI()
     }
     
@@ -120,7 +120,7 @@ class viewAge: UIViewController {
         
         
         //Constraints
-
+        
         NSLayoutConstraint.activate([
             labelOne.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             labelOne.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -156,7 +156,7 @@ class viewAge: UIViewController {
             textField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -100),
             textField.heightAnchor.constraint(equalToConstant: 75),
             textField.widthAnchor.constraint(equalToConstant: 103),
-       
+            
             buttonCont.topAnchor.constraint(equalTo: labelFive.bottomAnchor, constant: 40),
             buttonCont.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             buttonCont.heightAnchor.constraint(equalToConstant: 50),
@@ -167,7 +167,20 @@ class viewAge: UIViewController {
     //button action
     
     @objc func getNext(){
-        let vc = viewWeight()
+        let data = UserDefaults.standard
+
+        // Validate age input
+        guard let ageString = textField.text, let age = Int(ageString), age >= 0 && age <= 100 else {
+            let alert = UIAlertController(title: "Invalid Age", message: "Please enter a valid age between 0 and 100.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        data.set(age, forKey: "Age")
+        
+        let vc = viewWeight() 
         navigationController?.pushViewController(vc, animated: true)
     }
     

@@ -8,7 +8,7 @@
 import UIKit
 
 class viewGender: UIViewController {
-
+    
     //Var
     
     var gender : String = ""
@@ -117,7 +117,7 @@ class viewGender: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupUI()
     }
     
@@ -191,7 +191,7 @@ class viewGender: UIViewController {
             buttonFemale.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -120),
             buttonFemale.heightAnchor.constraint(equalToConstant: 65),
             buttonFemale.widthAnchor.constraint(equalToConstant: 161),
-
+            
             buttonCont.topAnchor.constraint(equalTo: buttonFemale.bottomAnchor, constant: 40),
             buttonCont.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             buttonCont.heightAnchor.constraint(equalToConstant: 50),
@@ -215,9 +215,23 @@ class viewGender: UIViewController {
         gender = "Female"
     }
     
+    //Mark:- Save data to defaults and go to next
+    
     @objc func getNext(){
-        let vc = viewAge()
-        navigationController?.pushViewController(vc, animated: true)
+        let data = UserDefaults.standard
+        
+        if gender.isEmpty {
+            let alert = UIAlertController(title: "Missing Gender", message: "Please choose your gender.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+        } else {
+            data.set(gender, forKey: "Gender")
+            
+            let vc = viewAge()
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
-
+    
+    
 }

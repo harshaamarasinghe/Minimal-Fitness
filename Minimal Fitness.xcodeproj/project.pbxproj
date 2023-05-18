@@ -237,6 +237,7 @@
 			packageReferences = (
 				568070452A12125300A9107F /* XCRemoteSwiftPackageReference "SnapKit" */,
 				56A773B32A13B28A00AA2AB5 /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */,
+				56A773BA2A15509E00AA2AB5 /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = 56375CBC29D17B4A0024F608 /* Products */;
 			projectDirPath = "";
@@ -435,7 +436,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.harsha.Minimal-Fitness";
+				PRODUCT_BUNDLE_IDENTIFIER = com.harsha.MinimalFitness;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -462,7 +463,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.harsha.Minimal-Fitness";
+				PRODUCT_BUNDLE_IDENTIFIER = com.harsha.MinimalFitness;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -508,6 +509,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.0;
+			};
+		};
+		56A773BA2A15509E00AA2AB5 /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

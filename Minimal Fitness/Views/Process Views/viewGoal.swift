@@ -218,7 +218,7 @@ class viewGoal: UIViewController {
         buttonLoose.layer.borderWidth = 0
         buttonGain.layer.borderWidth = 1
         
-        goal = "Loose weight"
+        goal = "Lose weight"
     }
     
     @objc func btnG(){
@@ -235,7 +235,26 @@ class viewGoal: UIViewController {
     }
     
     @objc func getNext(){
-        let vc = viewBMI()
-        navigationController?.pushViewController(vc, animated: true)
+        
+        let data = UserDefaults.standard
+        
+        if(goal.isEmpty){
+            let alert = UIAlertController(title: "Missing Goal", message: "Please choose your goal.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+        }
+        else{
+            
+            data.set(goal, forKey: "Goal")
+            
+            let vc = viewBMI()
+            navigationController?.pushViewController(vc, animated: true)
+            
+            
+        }
     }
+    
+
+    
 }

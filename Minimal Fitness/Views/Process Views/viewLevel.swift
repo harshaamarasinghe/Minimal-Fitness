@@ -266,8 +266,23 @@ class viewLevel: UIViewController {
     //button action
     
     @objc func getNext(){
-        let vc = viewGoal()
-        navigationController?.pushViewController(vc, animated: true)
+        
+        let data = UserDefaults.standard
+        
+        if(level.isEmpty){
+            let alert = UIAlertController(title: "Missing Level", message: "Please choose your level.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+        }
+        else{
+            
+            data.set(level, forKey: "Level")
+            
+            let vc = viewGoal()
+            navigationController?.pushViewController(vc, animated: true)
+            
+        }
     }
     
 }

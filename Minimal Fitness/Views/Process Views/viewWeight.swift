@@ -97,16 +97,16 @@ class viewWeight: UIViewController {
         return button
     }()
     
-    let buttonLbs : UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("lbs", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 28, weight: .bold)
-        button.backgroundColor = UIColor(red: 204/255, green: 190/255, blue: 248/255, alpha: 1.0)
-        button.titleLabel?.textColor = .white
-        button.layer.cornerRadius = 10
-        return button
-    }()
+//    let buttonLbs : UIButton = {
+//        let button = UIButton()
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        button.setTitle("lbs", for: .normal)
+//        button.titleLabel?.font = .systemFont(ofSize: 28, weight: .bold)
+//        button.backgroundColor = UIColor(red: 204/255, green: 190/255, blue: 248/255, alpha: 1.0)
+//        button.titleLabel?.textColor = .white
+//        button.layer.cornerRadius = 10
+//        return button
+//    }()
     
     let hStack : UIStackView = {
         let stack = UIStackView()
@@ -134,6 +134,9 @@ class viewWeight: UIViewController {
     
     func setupUI(){
         view.backgroundColor = .white
+        
+        btnKg()
+        
         view.addSubview(progressView)
         view.addSubview(labelOne)
         view.addSubview(labelTwo)
@@ -144,7 +147,7 @@ class viewWeight: UIViewController {
         view.addSubview(textField)
         
         hStack.addArrangedSubview(buttonKg)
-        hStack.addArrangedSubview(buttonLbs)
+       // hStack.addArrangedSubview(buttonLbs)
         
         view.addSubview(hStack)
         view.addSubview(buttonCont)
@@ -154,7 +157,7 @@ class viewWeight: UIViewController {
         //Button actions
         
         buttonKg.addTarget(self, action: #selector(btnKg), for: .touchUpInside)
-        buttonLbs.addTarget(self, action: #selector(btnLbs), for: .touchUpInside)
+//buttonLbs.addTarget(self, action: #selector(btnLbs), for: .touchUpInside)
         buttonCont.addTarget(self, action: #selector(getNext), for: .touchUpInside)
         
         //Constraints
@@ -199,8 +202,8 @@ class viewWeight: UIViewController {
             hStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             buttonKg.heightAnchor.constraint(equalToConstant: 56),
             buttonKg.widthAnchor.constraint(equalToConstant: 70),
-            buttonLbs.heightAnchor.constraint(equalToConstant: 56),
-            buttonLbs.widthAnchor.constraint(equalToConstant: 70),
+//            buttonLbs.heightAnchor.constraint(equalToConstant: 56),
+//            buttonLbs.widthAnchor.constraint(equalToConstant: 70),
             
             buttonCont.topAnchor.constraint(equalTo: buttonKg.bottomAnchor, constant: 20),
             buttonCont.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -211,22 +214,39 @@ class viewWeight: UIViewController {
     
     @objc func btnKg(){
         buttonKg.backgroundColor = UIColor(red: 182/255, green: 162/255, blue: 245/255, alpha: 1.0)
-        buttonLbs.backgroundColor = UIColor(red: 204/255, green: 190/255, blue: 248/255, alpha: 1.0)
+        //buttonLbs.backgroundColor = UIColor(red: 204/255, green: 190/255, blue: 248/255, alpha: 1.0)
         
         type = "kg"
     }
     
-    @objc func btnLbs(){
-        buttonLbs.backgroundColor = UIColor(red: 182/255, green: 162/255, blue: 245/255, alpha: 1.0)
-        buttonKg.backgroundColor = UIColor(red: 204/255, green: 190/255, blue: 248/255, alpha: 1.0)
-        
-        type = "lbs"
-    }
+//    @objc func btnLbs(){
+//        buttonLbs.backgroundColor = UIColor(red: 182/255, green: 162/255, blue: 245/255, alpha: 1.0)
+//        buttonKg.backgroundColor = UIColor(red: 204/255, green: 190/255, blue: 248/255, alpha: 1.0)
+//
+//        type = "lbs"
+//    }
     
     //button action
     
     @objc func getNext(){
+        
+        let data = UserDefaults.standard
+
+        guard let weightString = textField.text, let weight = Int(weightString), weight >= 0 && !(weightString.isEmpty) else {
+            let alert = UIAlertController(title: "Invalid Weight", message: "Please enter a valid weight.", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        data.set(weight, forKey: "Weight")
+        
+        
         let vc = viewHeight()
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+
+    
 }
