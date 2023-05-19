@@ -3,15 +3,11 @@ import SnapKit
 import FirebaseCore
 import FirebaseFirestore
 
-protocol ExerciseSelectionDelegate{
-    func didSelectExercise(name:String, desc:String, video:String)
-}
-
 class viewHome: UIViewController {
     
-    //Variables
+    //Mark:- Variables
     
-    let db = Firestore.firestore()
+    let db = Firestore.firestore() //Firebase Decl
     
     var dataArray: [[String: Any]] = []
     var nameDataArray: [String] = []
@@ -19,9 +15,8 @@ class viewHome: UIViewController {
     var picDataArray: [String] = []
     var videoDataArray: [String] = []
     
-    var exerciseDelegate: ExerciseSelectionDelegate?
     
-    //Components
+    //Mark:- Components
     
     let labelTitleOne : UILabel = {
         let label = UILabel()
@@ -60,7 +55,7 @@ class viewHome: UIViewController {
         return table
     }()
     
-    //Lifecycle
+    //Mark:- Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +69,7 @@ class viewHome: UIViewController {
         setupUI()
     }
     
-    //Setup UI
+    //Mark:- Funcs
     
     func setupUI(){
         view.backgroundColor = .white
@@ -193,13 +188,26 @@ extension viewHome : UITableViewDelegate, UITableViewDataSource{
         
         print(nameD,":",descD,":",videoD)
         
-        exerciseDelegate?.didSelectExercise(name: nameD, desc: descD, video: videoD)
         
-        getNext()
+        
+        //sendExerciseDataToViewExer(name: nameD, desc: descD, video: videoD)
+        getNext(name: nameD, desc: descD, video: videoD)
     }
     
-    @objc func getNext() {
+//    func sendExerciseDataToViewExer(name:String,desc:String,video:String){
+//        let exerVc = viewExercise()
+//        exerVc.labelWorkout.text = name
+//        exerVc.labelDesc.text = desc
+//        exerVc.videoId = video
+//
+//
+//    }
+    
+    @objc func getNext(name:String,desc:String,video:String) {
         let vc = viewExercise()
+        vc.labelWorkout.text = name
+        vc.labelDesc.text = desc
+        vc.videoId = video
         
         navigationController?.pushViewController(vc, animated: true)
     }

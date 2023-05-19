@@ -1,10 +1,7 @@
 import UIKit
 import WebKit
 
-class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, ExerciseSelectionDelegate {
-    
-    
-
+class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     //Mark: - Variables
     
     var timer: Timer?
@@ -12,10 +9,12 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     
     var videoId: String = ""
     
+    
+    
     //Mark: - Components
     
     let webView: WKWebView = {
-       let webView = WKWebView()
+        let webView = WKWebView()
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.layer.cornerRadius = 10
         return webView
@@ -56,13 +55,13 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     }()
     
     let weightPicker: UIPickerView = {
-            let picker = UIPickerView()
-            picker.translatesAutoresizingMaskIntoConstraints = false
-            return picker
+        let picker = UIPickerView()
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        return picker
     }()
-
+    
     let weightData = stride(from: 0.0, to: 200.5, by: 0.5).map { String(format: "%.1f kg", $0) }
-        
+    
     
     let hStackWeight : UIStackView = {
         let stack = UIStackView()
@@ -85,11 +84,11 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     }()
     
     let repetitionsPicker: UIPickerView = {
-            let picker = UIPickerView()
-            picker.translatesAutoresizingMaskIntoConstraints = false
-            return picker
+        let picker = UIPickerView()
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        return picker
     }()
-
+    
     let repetitionsData = Array(1...25)
     
     let hStackReps : UIStackView = {
@@ -113,11 +112,11 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     }()
     
     let setsPicker: UIPickerView = {
-            let picker = UIPickerView()
-            picker.translatesAutoresizingMaskIntoConstraints = false
-            return picker
+        let picker = UIPickerView()
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        return picker
     }()
-
+    
     let setData = Array(1...10)
     
     let hStackSets : UIStackView = {
@@ -127,8 +126,8 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         stack.spacing = 20
         return stack
     }()
-
-
+    
+    
     
     let startButton : UIButton = {
         let button = UIButton()
@@ -155,36 +154,28 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         weightPicker.dataSource = self
         
         setupUI()
-    }
-    
-    
-    func didSelectExercise(name: String, desc: String, video: String) {
-        labelWorkout.text = name
-        labelDesc.text = desc
-        videoId = video
+        
         
     }
     
-    @objc func presentExerciseSelecrVC(){
-        let destVc = viewHome()
-        destVc.exerciseDelegate = self
-    }
+    
+    
     
     func youtubeVideoView(){
-    
-      
+        
+        
         let embedHTML = "<html><body><iframe width=\"980\" height=\"500\" src=\"https://www.youtube.com/embed/\(videoId)?playsinline=1\" frameborder=\"0\" allowfullscreen></iframe></body></html>"
         webView.loadHTMLString(embedHTML, baseURL: nil)
     }
     
     func setupUI(){
         view.backgroundColor = .white
-      
+        
         let appearance = UINavigationBarAppearance()
         appearance.buttonAppearance.normal.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.orange]
         navigationItem.standardAppearance = appearance
         navigationController?.navigationBar.tintColor = UIColor.orange
-    
+        
         
         youtubeVideoView()
         
@@ -219,7 +210,7 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
             make.top.equalTo(webView.snp.bottom).offset(10)
             make.centerX.equalTo(view)
         }
-
+        
         labelDesc.snp.makeConstraints { make in
             make.top.equalTo(labelWorkout.snp.bottom).offset(5)
             make.left.equalTo(view.snp.left).offset(20)
@@ -240,9 +231,9 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
             make.left.equalTo(view.snp.left).offset(30)
             make.right.equalTo(view.snp.right).offset(-30)
         }
-
+        
         repetitionsPicker.snp.makeConstraints { make in
- 
+            
             make.width.equalTo(200)
             make.height.equalTo(100)
         }
@@ -254,7 +245,7 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         }
         
         setsPicker.snp.makeConstraints { make in
- 
+            
             make.width.equalTo(200)
             make.height.equalTo(100)
         }
@@ -266,7 +257,7 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         }
         
         weightPicker.snp.makeConstraints { make in
- 
+            
             make.width.equalTo(200)
             make.height.equalTo(100)
         }
@@ -278,87 +269,87 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         }
         
     }
-        
+    
     // MARK: - UIPickerViewDelegate & UIPickerViewDataSource
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1 // Number of components in the picker
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == repetitionsPicker {
+            return repetitionsData.count // Number of rows in the repetitions picker
+        } else if pickerView == setsPicker {
+            return setData.count // Number of rows in the sets picker
+        }else if pickerView == weightPicker {
+            return weightData.count // Number of rows in the weight picker
+        }
+        else {
+            return 0
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         
-        func numberOfComponents(in pickerView: UIPickerView) -> Int {
-            return 1 // Number of components in the picker
+        if pickerView == repetitionsPicker {
+            label.text = "\(repetitionsData[row])" // Display the data in each row of the repetitions picker
+        } else if pickerView == setsPicker {
+            label.text = "\(setData[row])" // Display the data in each row of the sets picker
+        }else if pickerView == weightPicker {
+            label.text = "\(weightData[row])" // Display the data in each row of the sets picker
         }
         
-        func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-            if pickerView == repetitionsPicker {
-                return repetitionsData.count // Number of rows in the repetitions picker
-            } else if pickerView == setsPicker {
-                return setData.count // Number of rows in the sets picker
-            }else if pickerView == weightPicker {
-                return weightData.count // Number of rows in the weight picker
-            }
-            else {
-                return 0
-            }
-        }
-        
-        func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-            let label = UILabel()
-            label.textAlignment = .center
-            label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-            
-            if pickerView == repetitionsPicker {
-                label.text = "\(repetitionsData[row])" // Display the data in each row of the repetitions picker
-            } else if pickerView == setsPicker {
-                label.text = "\(setData[row])" // Display the data in each row of the sets picker
-            }else if pickerView == weightPicker {
-                label.text = "\(weightData[row])" // Display the data in each row of the sets picker
-            }
-            
-            return label
-        }
+        return label
+    }
     
     //Mark:- Functions for startButton
     
     @objc func startButtonTapped() {
-            // Create and present the UIAlertController
-            let alertController = UIAlertController(title: "Workout Stopwatch", message: nil, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "Finish", style: .default, handler: { (_) in
-                self.stopTimer()
-                self.finishStopwatch(alertController)
-            }))
-            present(alertController, animated: true, completion: nil)
-            
-            // Start the stopwatch
-            startTimer()
-        }
+        // Create and present the UIAlertController
+        let alertController = UIAlertController(title: "Workout Stopwatch", message: nil, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Finish", style: .default, handler: { (_) in
+            self.stopTimer()
+            self.finishStopwatch(alertController)
+        }))
+        present(alertController, animated: true, completion: nil)
         
-        func startTimer() {
-            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (_) in
-                self.elapsedTime += 1.0
-                if let alertController = self.presentedViewController as? UIAlertController {
-                    alertController.message = self.formatElapsedTime(self.elapsedTime)
-                }
+        // Start the stopwatch
+        startTimer()
+    }
+    
+    func startTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (_) in
+            self.elapsedTime += 1.0
+            if let alertController = self.presentedViewController as? UIAlertController {
+                alertController.message = self.formatElapsedTime(self.elapsedTime)
             }
         }
+    }
+    
+    func stopTimer() {
+        timer?.invalidate()
+        timer = nil
         
-        func stopTimer() {
-            timer?.invalidate()
-            timer = nil
-            
-        }
-        
-        func formatElapsedTime(_ elapsedTime: TimeInterval) -> String {
-            let minutes = Int(elapsedTime / 60)
-            let seconds = Int(elapsedTime.truncatingRemainder(dividingBy: 60))
-            return String(format: "%02d:%02d", minutes, seconds)
-        }
+    }
+    
+    func formatElapsedTime(_ elapsedTime: TimeInterval) -> String {
+        let minutes = Int(elapsedTime / 60)
+        let seconds = Int(elapsedTime.truncatingRemainder(dividingBy: 60))
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
     
     func finishStopwatch(_ alertController: UIAlertController) {
-            alertController.dismiss(animated: true, completion: nil)
-            
-            // Perform any additional actions after the stopwatch finishes
-            // For example, navigate to a new view controller or update UI
-            
-            print("Total elapsed time: \(formatElapsedTime(elapsedTime))")
-            elapsedTime = 0.0
-        }
-
-
+        alertController.dismiss(animated: true, completion: nil)
+        
+        // Perform any additional actions after the stopwatch finishes
+        // For example, navigate to a new view controller or update UI
+        
+        print("Total elapsed time: \(formatElapsedTime(elapsedTime))")
+        elapsedTime = 0.0
+    }
+    
+    
 }

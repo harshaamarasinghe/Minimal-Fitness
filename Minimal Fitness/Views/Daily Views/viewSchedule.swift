@@ -1,6 +1,16 @@
 import UIKit
+import FirebaseCore
+import FirebaseFirestore
 
 class viewSchedule: UIViewController {
+    
+    //Mark:- Variables
+    
+    let db = Firestore.firestore() // Firebase
+    
+    var dataArray: [[String: Any]] = []
+    var nameDataArray: [String] = []
+    var picDataArray: [String] = []
     
     let exerciseImages : [UIImage] = [
         UIImage(named: "1")!,
@@ -22,7 +32,7 @@ class viewSchedule: UIViewController {
         "Sunday"
     ]
     
-    
+    //Mark:- Comps
     
     let labelTitleOne : UILabel = {
         let label = UILabel()
@@ -49,6 +59,8 @@ class viewSchedule: UIViewController {
         tableView.dataSource = self
     }
     
+    //Mark:- Funcs
+    
     func setupUI() {
         view.backgroundColor = .white
         view.addSubview(labelTitleOne)
@@ -68,6 +80,40 @@ class viewSchedule: UIViewController {
             make.size.equalTo(CGSize(width: 340, height: 600))
         }
     }
+    
+    func readDocument(){
+        
+        db.collection("/exercises/gain-weight/").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let data = document.data()
+                    self.dataArray.append(data)
+                }
+                
+                
+                self.saveNameArray()
+                self.savePicArray()
+                
+                //self.exerciseTable.reloadData()
+            }
+        }
+    }
+    
+    func saveNameArray() {
+        for data in dataArray {
+            self.nameDataArray.append(data["name"] as! String)
+        }
+    }
+    
+    func savePicArray() {
+        for data in dataArray {
+            self.picDataArray.append(data["pic"] as! String)
+        }
+    }
+    
+    
 }
 
 extension viewSchedule: UITableViewDelegate, UITableViewDataSource {
