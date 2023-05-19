@@ -1,12 +1,16 @@
 import UIKit
 import WebKit
 
-class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, ExerciseSelectionDelegate {
+    
+    
 
     //Mark: - Variables
     
     var timer: Timer?
     var elapsedTime: TimeInterval = 0.0
+    
+    var videoId: String = ""
     
     //Mark: - Components
     
@@ -23,7 +27,7 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         label.font = .systemFont(ofSize: 40, weight: .bold)
         label.textColor = .black
         
-        label.text = "Push Up"
+        label.text = "Error"
         label.textAlignment = .center
         return label
     }()
@@ -34,7 +38,7 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         label.font = .systemFont(ofSize: 16, weight: .bold)
         label.numberOfLines = 0
         label.textColor = .black
-        label.text = "Strength-building exercise that targets the chest, shoulders, and arms."
+        label.text = "Error"
         label.textAlignment = .center
         return label
     }()
@@ -153,8 +157,21 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         setupUI()
     }
     
+    
+    func didSelectExercise(name: String, desc: String, video: String) {
+        labelWorkout.text = name
+        labelDesc.text = desc
+        videoId = video
+        
+    }
+    
+    @objc func presentExerciseSelecrVC(){
+        let destVc = viewHome()
+        destVc.exerciseDelegate = self
+    }
+    
     func youtubeVideoView(){
-        let videoId = "ypxmdLxCK7k"
+    
       
         let embedHTML = "<html><body><iframe width=\"980\" height=\"500\" src=\"https://www.youtube.com/embed/\(videoId)?playsinline=1\" frameborder=\"0\" allowfullscreen></iframe></body></html>"
         webView.loadHTMLString(embedHTML, baseURL: nil)

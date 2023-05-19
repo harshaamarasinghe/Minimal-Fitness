@@ -3,15 +3,13 @@ import UIKit
 class viewSchedule: UIViewController {
     
     let exerciseImages : [UIImage] = [
-        UIImage(systemName: "figure.run")!,
-        UIImage(systemName: "figure.run")!,
-        UIImage(systemName: "figure.run")!,
-        UIImage(systemName: "figure.run")!,
-        UIImage(systemName: "figure.run")!,
-        UIImage(systemName: "figure.run")!,
-        UIImage(systemName: "figure.run")!,
-        
-        
+        UIImage(named: "1")!,
+        UIImage(named: "2")!,
+        UIImage(named: "3")!,
+        UIImage(named: "4")!,
+        UIImage(named: "5")!,
+        UIImage(named: "6")!,
+        UIImage(named: "7")!
     ]
     
     let desc : [String] = [
@@ -19,14 +17,21 @@ class viewSchedule: UIViewController {
         "Tuesday",
         "Wednesday",
         "Thursday",
-        "Fridday",
+        "Friday",
         "Saturday",
-        "Sunday",
-       
+        "Sunday"
     ]
     
     
-   
+    
+    let labelTitleOne : UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: 36, weight: .thin)
+        label.text = "Workout Schedule"
+        label.textAlignment = .center
+        return label
+    }()
     
     let tableView: UITableView = {
         let table = UITableView()
@@ -46,14 +51,22 @@ class viewSchedule: UIViewController {
     
     func setupUI() {
         view.backgroundColor = .white
+        view.addSubview(labelTitleOne)
         view.addSubview(tableView)
         
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-        ])
+        
+        labelTitleOne.snp.makeConstraints { make in
+            make.top.equalTo(view.snp.top).offset(70)
+            make.centerX.equalTo(view)
+        }
+        
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(labelTitleOne.snp.bottom).offset(20)
+            make.left.equalTo(view.safeAreaLayoutGuide.snp.left).offset(20)
+            make.right.equalTo(view.safeAreaLayoutGuide.snp.right).offset(-20)
+            make.centerX.equalTo(view)
+            make.size.equalTo(CGSize(width: 340, height: 600))
+        }
     }
 }
 
@@ -69,9 +82,8 @@ extension viewSchedule: UITableViewDelegate, UITableViewDataSource {
         
         let image = exerciseImages[indexPath.row]
         let label = desc[indexPath.row]
-        
         cell.configure(with: image, and: label)
-        
+        cell.contentView.backgroundColor = .white
         return cell
     }
     
