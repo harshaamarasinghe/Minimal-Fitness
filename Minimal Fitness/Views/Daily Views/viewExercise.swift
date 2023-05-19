@@ -13,6 +13,7 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     let webView: WKWebView = {
        let webView = WKWebView()
         webView.translatesAutoresizingMaskIntoConstraints = false
+        webView.layer.cornerRadius = 10
         return webView
     }()
     
@@ -130,7 +131,7 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("  Start Workout  ", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 28, weight: .semibold)
-        button.backgroundColor = UIColor(red: 21/255, green: 0/255, blue: 255/255, alpha: 1.0)
+        button.backgroundColor = .orange
         button.layer.cornerRadius = 10
         return button
     }()
@@ -162,6 +163,12 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     func setupUI(){
         view.backgroundColor = .white
       
+        let appearance = UINavigationBarAppearance()
+        appearance.buttonAppearance.normal.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.orange]
+        navigationItem.standardAppearance = appearance
+        navigationController?.navigationBar.tintColor = UIColor.orange
+    
+        
         youtubeVideoView()
         
         view.addSubview(webView)

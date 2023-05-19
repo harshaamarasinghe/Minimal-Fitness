@@ -270,7 +270,7 @@ class viewBMI: UIViewController {
         tabBarAppearance.tintColor = .orange
         
         tabBarController.modalPresentationStyle = .fullScreen
-        present(tabBarController, animated: true)
+        present(tabBarController, animated: false)
         
     }
     

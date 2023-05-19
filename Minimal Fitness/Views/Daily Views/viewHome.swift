@@ -9,16 +9,16 @@ class viewHome: UIViewController {
     let userName : String = "Harsha!"
     
     let exerciseImages : [UIImage] = [
-        UIImage(named: "push-up")!,
-        UIImage(named: "push-up")!,
-        UIImage(named: "push-up")!,
-        UIImage(named: "push-up")!,
-        UIImage(named: "push-up")!,
-        UIImage(named: "push-up")!,
-        UIImage(named: "push-up")!,
-        UIImage(named: "push-up")!,
-        UIImage(named: "push-up")!,
-        UIImage(named: "push-up")!,
+        UIImage(named: "1")!,
+        UIImage(named: "2")!,
+        UIImage(named: "3")!,
+        UIImage(named: "4")!,
+        UIImage(named: "5")!,
+        UIImage(named: "6")!,
+        UIImage(named: "7")!,
+        UIImage(named: "8")!,
+        UIImage(named: "9")!,
+        UIImage(named: "10")!,
         
     ]
     
@@ -87,19 +87,20 @@ class viewHome: UIViewController {
 //        table.layer.borderWidth = 1
 //        table.layer.borderColor = CGColor(red: 255, green: 255, blue: 255, alpha: 1.0)
         table.layer.cornerRadius = 8
-        table.backgroundColor = UIColor(red: 208/255, green: 208/255, blue: 208/255, alpha: 1.0)
-        
+        //table.backgroundColor = UIColor(red: 208/255, green: 208/255, blue: 208/255, alpha: 1.0)
+        //table.showsVerticalScrollIndicator = true
+
         return table
     }()
     
     
-    let image: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "home"))
-        imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
+//    let image: UIImageView = {
+//        let imageView = UIImageView(image: UIImage(named: "home"))
+//        imageView.contentMode = .scaleAspectFit
+//        imageView.translatesAutoresizingMaskIntoConstraints = false
+//        return imageView
+//    }()
+//
     
     //Lifecycle
     
@@ -120,7 +121,7 @@ class viewHome: UIViewController {
         view.addSubview(labelTitleTwo)
         view.addSubview(imageProfile)
         view.addSubview(exerciseTable)
-        view.addSubview(image)
+        //view.addSubview(image)
         
 //        labelName.text = userName
 //
@@ -154,15 +155,15 @@ class viewHome: UIViewController {
             make.left.equalTo(view.safeAreaLayoutGuide.snp.left).offset(20)
             make.right.equalTo(view.safeAreaLayoutGuide.snp.right).offset(-20)
             make.centerX.equalTo(view)
-            make.size.equalTo(CGSize(width: 340, height: 340))
+            make.size.equalTo(CGSize(width: 340, height: 600))
         }
         
         
-        image.snp.makeConstraints { make in
-            make.top.equalTo(exerciseTable.snp.bottom).offset(20)
-            make.left.equalTo(view.safeAreaLayoutGuide.snp.left).offset(-20)
-            //make.centerX.equalTo(view)
-            make.size.equalTo(CGSize(width: 350, height: 350))
+//        image.snp.makeConstraints { make in
+//            make.top.equalTo(exerciseTable.snp.bottom).offset(20)
+//            make.left.equalTo(view.safeAreaLayoutGuide.snp.left).offset(-20)
+//            //make.centerX.equalTo(view)
+//            make.size.equalTo(CGSize(width: 350, height: 350))
         }
         
         
@@ -193,7 +194,7 @@ class viewHome: UIViewController {
 //            make.size.equalTo(CGSize(width: 340, height: 50))
 //        }
     }
-}
+
 
 extension viewHome : UITableViewDelegate, UITableViewDataSource{
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -211,7 +212,7 @@ extension viewHome : UITableViewDelegate, UITableViewDataSource{
         
         cell.configure(with: image, and: label)
         
-        cell.contentView.backgroundColor = UIColor(red: 236/255, green: 236/255, blue: 236/255, alpha: 1.0)
+        cell.contentView.backgroundColor = .white
         
         return cell
         
