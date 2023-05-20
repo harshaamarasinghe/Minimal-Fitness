@@ -1,6 +1,7 @@
 import UIKit
 import FirebaseCore
 import FirebaseFirestore
+import SnapKit
 
 class viewSchedule: UIViewController {
     
@@ -81,39 +82,7 @@ class viewSchedule: UIViewController {
         }
     }
     
-    func readDocument(){
-        
-        db.collection("/exercises/gain-weight/").getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    let data = document.data()
-                    self.dataArray.append(data)
-                }
-                
-                
-                self.saveNameArray()
-                self.savePicArray()
-                
-                //self.exerciseTable.reloadData()
-            }
-        }
-    }
-    
-    func saveNameArray() {
-        for data in dataArray {
-            self.nameDataArray.append(data["name"] as! String)
-        }
-    }
-    
-    func savePicArray() {
-        for data in dataArray {
-            self.picDataArray.append(data["pic"] as! String)
-        }
-    }
-    
-    
+  
 }
 
 extension viewSchedule: UITableViewDelegate, UITableViewDataSource {
@@ -136,5 +105,38 @@ extension viewSchedule: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        let selectedRow = indexPath.row
+        
+        if(selectedRow == 0){
+            //monday
+            getNextVC(pathStr: "/exercises/gain-weight/day-one",day: "Monday")
+        }else if(selectedRow == 1){
+            //tuesday
+            getNextVC(pathStr: "/exercises/gain-weight/day-two",day: "Tuesday")
+        }else if(selectedRow == 2){
+            //wednesday
+            getNextVC(pathStr: "/exercises/gain-weight/day-three",day: "Wednesday")
+        }else if(selectedRow == 3){
+            //thursday
+            getNextVC(pathStr: "/exercises/gain-weight/day-four",day: "Thursday")
+        }else if(selectedRow == 4){
+            //friday
+            getNextVC(pathStr: "/exercises/gain-weight/day-five",day: "Friday")
+            
+        }else if(selectedRow == 5){
+            //saturday
+            getNextVC(pathStr: "/exercises/gain-weight/day-six",day: "Saturday")
+        }else if(selectedRow == 6){
+            //sunday
+            getNextVC(pathStr: "/exercises/gain-weight/day-seven",day: "Sunday")
+        }
+        
+    }
+    
+    @objc func getNextVC(pathStr:String, day:String){
+        let vc = viewDailyExercises()
+        vc.pathStr = pathStr
+        vc.labelTitleOne.text = day
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

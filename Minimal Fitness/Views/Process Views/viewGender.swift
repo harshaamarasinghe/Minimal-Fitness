@@ -117,7 +117,7 @@ class viewGender: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationItem.setHidesBackButton(true, animated: true)
         setupUI()
     }
     

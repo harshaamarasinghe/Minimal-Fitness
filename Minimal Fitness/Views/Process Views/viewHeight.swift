@@ -129,6 +129,7 @@ class viewHeight: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToDismiss)))
         setupUI()
     }
     
@@ -245,4 +246,7 @@ class viewHeight: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
 
+    @objc func didTapToDismiss() {
+            view.endEditing(true)
+        }
 }

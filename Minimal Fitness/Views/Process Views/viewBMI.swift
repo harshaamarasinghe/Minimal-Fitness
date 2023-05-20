@@ -40,7 +40,7 @@ class viewBMI: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 36, weight: .thin)
         label.text = "You"
-        label.textAlignment = .center
+        label.textAlignment = .left
         return label
     }()
     
@@ -50,7 +50,7 @@ class viewBMI: UIViewController {
         label.font = .systemFont(ofSize: 36, weight: .thin)
         label.text = "Are"
         label.textAlignment = .center
-        //label.layer.borderColor = 
+        //label.layer.borderColor =
         return label
     }()
     
@@ -73,7 +73,7 @@ class viewBMI: UIViewController {
     let labelFive : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 32, weight: .thin)
+        label.font = .systemFont(ofSize: 28, weight: .regular)
         //label.text = "Underweight"
         label.textAlignment = .center
         label.textColor = .white
@@ -173,24 +173,29 @@ class viewBMI: UIViewController {
         }
         
         image.snp.makeConstraints { make in
-            make.top.equalTo(labelTwo).offset(50)
+            make.top.equalTo(labelTwo).offset(10)
             make.centerX.equalTo(view)
-            make.size.equalTo(CGSize(width: 240, height: 180))
+            make.size.equalTo(CGSize(width: 350, height: 350))
         }
         
         hStackMid.snp.makeConstraints { make in
-            make.top.equalTo(image.snp.bottom).offset(40)
+            make.top.equalTo(image.snp.bottom).offset(10)
             make.centerX.equalTo(view)
         }
         
         labelFive.snp.makeConstraints { make in
-            make.size.equalTo(CGSize(width: 200, height: 100))
+            make.size.equalTo(CGSize(width: 220, height: 100))
         }
         
+        vStack.snp.makeConstraints { make in
+            make.top.equalTo(vStack).offset(10)
+            //make.top.equalTo(vStack.snp.bottom).offset(50)
+            make.left.equalTo(view.safeAreaLayoutGuide.snp.left).offset(40)
+        }
         hStack.snp.makeConstraints { make in
-            make.top.equalTo(hStackMid.snp.bottom).offset(50)
+            make.top.equalTo(hStackMid.snp.bottom).offset(20)
             //make.centerX.equalTo(view)
-            make.left.equalTo(view.safeAreaLayoutGuide.snp.left).offset(60)
+            make.left.equalTo(view.safeAreaLayoutGuide.snp.left).offset(80)
         }
         
         labelSeven.snp.makeConstraints { make in
@@ -198,7 +203,7 @@ class viewBMI: UIViewController {
         }
         
         buttonStart.snp.makeConstraints { make in
-            make.top.equalTo(hStack.snp.bottom).offset(60)
+            make.top.equalTo(hStack.snp.bottom).offset(50)
             //make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
             make.centerX.equalTo(view)
             make.size.equalTo(CGSize(width: 227, height: 50))

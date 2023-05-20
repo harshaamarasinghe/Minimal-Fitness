@@ -1,9 +1,9 @@
 import UIKit
 import SnapKit
 
-class CustomCell: UITableViewCell {
+class ScheduleCustomCell: UITableViewCell {
 
-    static let identifier = "CustomCell"
+    static let identifier = "ScheduleCustomCell"
     
     private let myImageView : UIImageView = {
        let image = UIImageView()
@@ -24,14 +24,25 @@ class CustomCell: UITableViewCell {
         return label
     }()
     
-    private let myImageViewTwo : UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.contentMode = .scaleAspectFit
-        image.image = UIImage(systemName: "arrow.forward")
-        image.tintColor = .darkGray
-        return image
+    private let myLabelMini : UILabel = {
+        let label = UILabel()
+        label.textColor = .label
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: 12, weight: .thin)
+        label.numberOfLines = 0
+        label.text = "Error"
+        return label
     }()
+    
+//    private let myImageViewTwo : UIImageView = {
+//        let image = UIImageView()
+//        image.translatesAutoresizingMaskIntoConstraints = false
+//        image.contentMode = .scaleAspectFit
+//        image.image = UIImage(systemName: "arrow.forward")
+//        image.tintColor = .darkGray
+//        return image
+//    }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -44,16 +55,17 @@ class CustomCell: UITableViewCell {
     
     //Configuring Table
     
-    func configure(with image: UIImage, and label: String){
+    func configure(with image: UIImage, label: String, labelMini:String){
         self.myImageView.image = image
         self.myLabel.text = label
+        self.myLabelMini.text = labelMini
     }
     
     
     private func setupUI(){
         self.contentView.addSubview(myImageView)
         self.contentView.addSubview(myLabel)
-        self.contentView.addSubview(myImageViewTwo)
+        self.contentView.addSubview(myLabelMini)
         
         //Constraints
         
@@ -66,15 +78,22 @@ class CustomCell: UITableViewCell {
         
         myLabel.snp.makeConstraints { make in
             make.top.equalTo(self.contentView.layoutMarginsGuide.snp.top)
-            make.bottom.equalTo(self.contentView.layoutMarginsGuide.snp.bottom)
+            //make.bottom.equalTo(self.contentView.layoutMarginsGuide.snp.bottom)
             make.left.equalTo(self.myImageView.snp.right).offset(20)
         }
         
-        myImageViewTwo.snp.makeConstraints { make in
-            make.top.equalTo(self.contentView.layoutMarginsGuide.snp.top)
+        myLabelMini.snp.makeConstraints { make in
+            make.top.equalTo(myLabel.snp.top)
             make.bottom.equalTo(self.contentView.layoutMarginsGuide.snp.bottom)
-            make.left.equalTo(self.myLabel.snp.right).offset(20)
-            make.right.equalTo(self.contentView.layoutMarginsGuide.snp.right).offset(-20)
+            make.left.equalTo(self.myImageView.snp.right).offset(20)
+            
         }
+        
+//        myImageViewTwo.snp.makeConstraints { make in
+//            make.top.equalTo(self.contentView.layoutMarginsGuide.snp.top)
+//            make.bottom.equalTo(self.contentView.layoutMarginsGuide.snp.bottom)
+//            make.left.equalTo(self.myLabel.snp.right).offset(20)
+//            make.right.equalTo(self.contentView.layoutMarginsGuide.snp.right).offset(-20)
+//        }
     }
 }

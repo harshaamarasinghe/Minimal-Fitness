@@ -62,7 +62,7 @@ class viewProfile: UIViewController {
         stack.spacing = 0
         return stack
     }()
-
+    
     
     let labelWeightOne : UILabel = {
         let label = UILabel()
@@ -80,7 +80,7 @@ class viewProfile: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 20, weight: .thin)
         label.textColor = UIColor(red: 72/255, green: 72/255, blue: 72/255, alpha: 1.0)
-
+        
         
         label.text = "kg"
         label.textAlignment = .center
@@ -101,7 +101,7 @@ class viewProfile: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 26, weight: .thin)
         label.textColor = UIColor(red: 72/255, green: 72/255, blue: 72/255, alpha: 1.0)
-
+        
         
         //label.text = "Profile"
         label.textAlignment = .center
@@ -113,7 +113,7 @@ class viewProfile: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 20, weight: .thin)
         label.textColor = UIColor(red: 72/255, green: 72/255, blue: 72/255, alpha: 1.0)
-
+        
         
         label.text = "cm"
         label.textAlignment = .center
@@ -181,7 +181,7 @@ class viewProfile: UIViewController {
         return button
     }()
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -198,6 +198,8 @@ class viewProfile: UIViewController {
         view.addSubview(labelProfile)
         view.addSubview(image)
         view.addSubview(labelName)
+        
+        buttonLogout.addTarget(self, action: #selector(logOut), for: .touchUpInside)
         
         hStackAge.addArrangedSubview(labelAgeOne)
         hStackAge.addArrangedSubview(labelAgeTwo)
@@ -237,7 +239,7 @@ class viewProfile: UIViewController {
             
             make.centerX.equalTo(view)
         }
-
+        
         vStackRowTwo.snp.makeConstraints { make in
             make.top.equalTo(labelName.snp.bottom).offset(40)
             //make.centerX.equalTo(view)
@@ -255,32 +257,33 @@ class viewProfile: UIViewController {
             //make.left.equalTo(view.snp.left).offset(50)
         }
         
-//
-//        labelFive.snp.makeConstraints { make in
-//            make.size.equalTo(CGSize(width: 200, height: 100))
-//        }
-//
-//        hStack.snp.makeConstraints { make in
-//            make.top.equalTo(hStackMid.snp.bottom).offset(50)
-//            //make.centerX.equalTo(view)
-//            make.left.equalTo(view.safeAreaLayoutGuide.snp.left).offset(60)
-//        }
-//
-//        labelSeven.snp.makeConstraints { make in
-//            make.size.equalTo(CGSize(width: 200, height: 50))
-//        }
-//
-//        buttonStart.snp.makeConstraints { make in
-//            make.top.equalTo(hStack.snp.bottom).offset(60)
-//            //make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
-//            make.centerX.equalTo(view)
-//            make.size.equalTo(CGSize(width: 227, height: 50))
-//        }
-//
-        
-        
     }
-    
- 
+    @objc func logOut() {
+        let alert = UIAlertController(title: "Logout", message: "Are you sure you want to log out?", preferredStyle: .alert)
+        
+        let logoutAction = UIAlertAction(title: "OK", style: .default) { _ in
+            self.performLogout()
+        }
+        alert.addAction(logoutAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+
+    func performLogout() {
+        let vc = screenOne()
+        
+        vc.hidesBottomBarWhenPushed = true
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
     
 }
+
+
+
+
+

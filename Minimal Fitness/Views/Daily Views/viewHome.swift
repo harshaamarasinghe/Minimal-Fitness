@@ -15,6 +15,7 @@ class viewHome: UIViewController {
     var picDataArray: [String] = []
     var videoDataArray: [String] = []
     
+    var dayOfWeek: String = "Monday"
     
     //Mark:- Components
     
@@ -28,6 +29,16 @@ class viewHome: UIViewController {
     }()
     
     let labelTitleTwo : UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: 18, weight: .medium)
+        label.textColor = UIColor(red: 89/255, green: 89/255, blue: 89/255, alpha: 1.0)
+        label.text = "Bring your best to the tables"
+        label.textAlignment = .center
+        return label
+    }()
+    
+    let labelTitleThree : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 14, weight: .thin)
@@ -60,7 +71,15 @@ class viewHome: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        readDocument()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE" // Set the format to display the day of the week
+        
+        let currentDate = Date() // Get the current date
+        dayOfWeek = dateFormatter.string(from: currentDate) // Get the day of the week
+        
+        labelTitleTwo.text = "It's \(dayOfWeek)" // Update the label text
+        
+        chooseTheExerciseList()
         
         self.exerciseTable.delegate = self
         self.exerciseTable.dataSource = self
@@ -75,6 +94,7 @@ class viewHome: UIViewController {
         view.backgroundColor = .white
         view.addSubview(labelTitleOne)
         view.addSubview(labelTitleTwo)
+        view.addSubview(labelTitleThree)
         view.addSubview(imageProfile)
         view.addSubview(exerciseTable)
         
@@ -90,6 +110,11 @@ class viewHome: UIViewController {
             make.left.equalTo(view.safeAreaLayoutGuide.snp.left).offset(25)
         }
         
+        labelTitleThree.snp.makeConstraints { make in
+            make.top.equalTo(labelTitleTwo.snp.bottom).offset(5)
+            make.left.equalTo(view.safeAreaLayoutGuide.snp.left).offset(25)
+        }
+        
         imageProfile.snp.makeConstraints { make in
             make.top.equalTo(view.snp.top).offset(60)
             make.right.equalTo(view.snp.right).offset(-25)
@@ -97,7 +122,7 @@ class viewHome: UIViewController {
         }
         
         exerciseTable.snp.makeConstraints { make in
-            make.top.equalTo(labelTitleTwo.snp.bottom).offset(40)
+            make.top.equalTo(labelTitleThree.snp.bottom).offset(40)
             make.left.equalTo(view.safeAreaLayoutGuide.snp.left).offset(20)
             make.right.equalTo(view.safeAreaLayoutGuide.snp.right).offset(-20)
             make.centerX.equalTo(view)
@@ -105,9 +130,26 @@ class viewHome: UIViewController {
         }
     }
     
-    func readDocument(){
+    //Mark:- getting the correct list of exercises
+    func chooseTheExerciseList(){
         
-        db.collection("/exercises/gain-weight/day-one").getDocuments() { (querySnapshot, err) in
+        if(self.dayOfWeek == "Monday"){readDocument(pathStr: "/exercises/gain-weight/day-one")}
+        else if(self.dayOfWeek == "Tuesday"){readDocument(pathStr: "/exercises/gain-weight/day-two")}
+        else if(self.dayOfWeek == "Wednesday"){ readDocument(pathStr: "/exercises/gain-weight/day-three")}
+        else if(self.dayOfWeek == "Thursday"){readDocument(pathStr: "/exercises/gain-weight/day-four")}
+        else if(self.dayOfWeek == "Friday"){readDocument(pathStr: "/exercises/gain-weight/day-five")}
+        else if(self.dayOfWeek == "Saturday"){readDocument(pathStr: "/exercises/gain-weight/day-six")}
+        else if(self.dayOfWeek == "Sunday"){readDocument(pathStr: "/exercises/gain-weight/day-seven")}
+        
+        else{readDocument(pathStr: "/exercises/gain-weight/day-one")}
+        
+        
+        
+    }
+    
+    func readDocument(pathStr:String){
+        
+        db.collection(pathStr).getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
@@ -188,20 +230,9 @@ extension viewHome : UITableViewDelegate, UITableViewDataSource{
         
         print(nameD,":",descD,":",videoD)
         
-        
-        
-        //sendExerciseDataToViewExer(name: nameD, desc: descD, video: videoD)
         getNext(name: nameD, desc: descD, video: videoD)
     }
     
-//    func sendExerciseDataToViewExer(name:String,desc:String,video:String){
-//        let exerVc = viewExercise()
-//        exerVc.labelWorkout.text = name
-//        exerVc.labelDesc.text = desc
-//        exerVc.videoId = video
-//
-//
-//    }
     
     @objc func getNext(name:String,desc:String,video:String) {
         let vc = viewExercise()
@@ -211,7 +242,7 @@ extension viewHome : UITableViewDelegate, UITableViewDataSource{
         
         navigationController?.pushViewController(vc, animated: true)
     }
-
+    
 }
 
 

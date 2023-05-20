@@ -129,6 +129,8 @@ class viewWeight: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToDismiss)))
+        
         setupUI()
     }
     
@@ -247,6 +249,8 @@ class viewWeight: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-
+    @objc func didTapToDismiss() {
+            view.endEditing(true)
+        }
     
 }

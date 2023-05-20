@@ -97,6 +97,8 @@ class viewAge: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToDismiss)))
+        
         setupUI()
     }
     
@@ -183,5 +185,9 @@ class viewAge: UIViewController {
         let vc = viewWeight() 
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    @objc func didTapToDismiss() {
+            view.endEditing(true)
+        }
     
 }

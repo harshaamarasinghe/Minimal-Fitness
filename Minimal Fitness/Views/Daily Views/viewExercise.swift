@@ -23,7 +23,7 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     let labelWorkout : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 40, weight: .bold)
+        label.font = .systemFont(ofSize: 40, weight: .thin)
         label.textColor = .black
         
         label.text = "Error"
@@ -34,7 +34,7 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     let labelDesc : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 16, weight: .bold)
+        label.font = .systemFont(ofSize: 16, weight: .thin)
         label.numberOfLines = 0
         label.textColor = .black
         label.text = "Error"
@@ -47,7 +47,7 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     let labelWeight : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.font = .systemFont(ofSize: 24, weight: .thin)
         label.textColor = .black
         label.text = "Weight"
         label.textAlignment = .center
@@ -76,7 +76,7 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     let labelReps : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.font = .systemFont(ofSize: 24, weight: .thin)
         label.textColor = .black
         label.text = "Reps"
         label.textAlignment = .center
@@ -104,7 +104,7 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     let labelSets : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.font = .systemFont(ofSize: 24, weight: .thin)
         label.textColor = .black
         label.text = "Sets"
         label.textAlignment = .center
@@ -127,20 +127,20 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         return stack
     }()
     
-    
-    
     let startButton : UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("  Start Workout  ", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 28, weight: .semibold)
-        button.backgroundColor = .orange
+        button.backgroundColor = UIColor(red: 69/255, green: 90/255, blue: 100/255, alpha: 1.0)
         button.layer.cornerRadius = 10
         return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.setHidesBackButton(true, animated: true)
         
         repetitionsPicker.delegate = self
         repetitionsPicker.dataSource = self
