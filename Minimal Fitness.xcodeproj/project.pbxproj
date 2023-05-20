@@ -29,7 +29,6 @@
 		56A773B02A135CEA00AA2AB5 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A773AF2A135CEA00AA2AB5 /* CustomCell.swift */; };
 		56A773B22A136C4700AA2AB5 /* viewDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A773B12A136C4700AA2AB5 /* viewDisplay.swift */; };
 		56A773B52A13B28A00AA2AB5 /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 56A773B42A13B28A00AA2AB5 /* YouTubePlayerKit */; };
-		56A773B72A13B3D300AA2AB5 /* testview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A773B62A13B3D300AA2AB5 /* testview.swift */; };
 		56A773B92A13DBA800AA2AB5 /* viewExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A773B82A13DBA800AA2AB5 /* viewExercise.swift */; };
 		56A773BF2A15FAAC00AA2AB5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 56A773BE2A15FAAC00AA2AB5 /* FirebaseAuth */; };
 		56A773C12A15FAAC00AA2AB5 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 56A773C02A15FAAC00AA2AB5 /* FirebaseDatabase */; };
@@ -38,6 +37,7 @@
 		56EA7FDF2A176F17006077D5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 56EA7FDE2A176F17006077D5 /* GoogleService-Info.plist */; };
 		56EA7FE12A17E17A006077D5 /* viewDailyExercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EA7FE02A17E17A006077D5 /* viewDailyExercises.swift */; };
 		56EA7FE32A18850C006077D5 /* ScheduleCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EA7FE22A18850C006077D5 /* ScheduleCustomView.swift */; };
+		56EA7FE72A18F49C006077D5 /* viewEditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EA7FE62A18F49C006077D5 /* viewEditProfile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,12 +75,12 @@
 		56A773AD2A128CD400AA2AB5 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		56A773AF2A135CEA00AA2AB5 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		56A773B12A136C4700AA2AB5 /* viewDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewDisplay.swift; sourceTree = "<group>"; };
-		56A773B62A13B3D300AA2AB5 /* testview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testview.swift; sourceTree = "<group>"; };
 		56A773B82A13DBA800AA2AB5 /* viewExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewExercise.swift; sourceTree = "<group>"; };
 		56AA714C2A0CBCC300035FA1 /* viewHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewHome.swift; sourceTree = "<group>"; };
 		56EA7FDE2A176F17006077D5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		56EA7FE02A17E17A006077D5 /* viewDailyExercises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewDailyExercises.swift; sourceTree = "<group>"; };
 		56EA7FE22A18850C006077D5 /* ScheduleCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCustomView.swift; sourceTree = "<group>"; };
+		56EA7FE62A18F49C006077D5 /* viewEditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewEditProfile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,15 +171,15 @@
 			children = (
 				56AA714C2A0CBCC300035FA1 /* viewHome.swift */,
 				56A773B82A13DBA800AA2AB5 /* viewExercise.swift */,
-				56EA7FE02A17E17A006077D5 /* viewDailyExercises.swift */,
-				56A773B12A136C4700AA2AB5 /* viewDisplay.swift */,
 				56A773A72A128C6700AA2AB5 /* viewSchedule.swift */,
+				56EA7FE02A17E17A006077D5 /* viewDailyExercises.swift */,
 				56A773A92A128C7B00AA2AB5 /* viewProgress.swift */,
 				56A773AB2A128C8D00AA2AB5 /* viewProfile.swift */,
 				56A773AD2A128CD400AA2AB5 /* TabBarController.swift */,
-				56A773B62A13B3D300AA2AB5 /* testview.swift */,
 				56A773AF2A135CEA00AA2AB5 /* CustomCell.swift */,
 				56EA7FE22A18850C006077D5 /* ScheduleCustomView.swift */,
+				56EA7FE62A18F49C006077D5 /* viewEditProfile.swift */,
+				56A773B12A136C4700AA2AB5 /* viewDisplay.swift */,
 			);
 			path = "Daily Views";
 			sourceTree = "<group>";
@@ -289,7 +289,6 @@
 				56A773B22A136C4700AA2AB5 /* viewDisplay.swift in Sources */,
 				56375CBF29D17B4A0024F608 /* AppDelegate.swift in Sources */,
 				5689FAE729D548E60051B448 /* viewHeight.swift in Sources */,
-				56A773B72A13B3D300AA2AB5 /* testview.swift in Sources */,
 				5689FADD29D2CB4E0051B448 /* signup.swift in Sources */,
 				56A773B02A135CEA00AA2AB5 /* CustomCell.swift in Sources */,
 				568070492A12150800A9107F /* viewBMI.swift in Sources */,
@@ -303,6 +302,7 @@
 				5689FAE129D314580051B448 /* viewGender.swift in Sources */,
 				56A773A82A128C6700AA2AB5 /* viewSchedule.swift in Sources */,
 				56EA7FE12A17E17A006077D5 /* viewDailyExercises.swift in Sources */,
+				56EA7FE72A18F49C006077D5 /* viewEditProfile.swift in Sources */,
 				56375CC129D17B4A0024F608 /* SceneDelegate.swift in Sources */,
 				56A773B92A13DBA800AA2AB5 /* viewExercise.swift in Sources */,
 				56AA714D2A0CBCC300035FA1 /* viewHome.swift in Sources */,

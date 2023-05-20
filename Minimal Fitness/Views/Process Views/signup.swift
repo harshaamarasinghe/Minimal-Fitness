@@ -1,15 +1,8 @@
-//
-//  signup.swift
-//  Minimal Fitness
-//
-//  Created by Harsha Amarasinghe on 2023-03-28.
-//
-
 import UIKit
 
 class signup: UIViewController {
 
-    //UI Comps
+    //Mark:- UI Comps
 
     let labelOne : UILabel = {
         let label = UILabel()
@@ -61,7 +54,6 @@ class signup: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "apple"), for: .normal)
-        //button.imageView?.contentMode = .scaleAspectFit
         button.setTitle("   Continue with Apple", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         button.backgroundColor = UIColor(red: 69/255, green: 90/255, blue: 100/255, alpha: 1.0)
@@ -101,9 +93,10 @@ class signup: UIViewController {
         super.viewDidLoad()
         self.navigationItem.setHidesBackButton(true, animated: true)
         setupUI()
-        
     }
 
+    //Mark:- Functions
+    
     func setupUI(){
         view.backgroundColor = .white
         view.addSubview(labelOne)
@@ -118,7 +111,7 @@ class signup: UIViewController {
         
         view.addSubview(hStack)
         
-        //button actions
+        //Mark:- button actions
         
         buttonSI.addTarget(self, action: #selector(getSignIn), for: .touchUpInside)
         buttonGoogle.addTarget(self, action: #selector(getGender), for: .touchUpInside)
@@ -132,7 +125,6 @@ class signup: UIViewController {
             labelTwo.topAnchor.constraint(equalTo: labelOne.bottomAnchor),
             labelTwo.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             labelTwo.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            //labelTwo.heightAnchor.constraint(equalToConstant: 40),
             
             imageSI.topAnchor.constraint(equalTo: labelTwo.bottomAnchor),
             imageSI.heightAnchor.constraint(equalToConstant: 381),
@@ -159,8 +151,6 @@ class signup: UIViewController {
             hStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
-    
-    //button action
     
     @objc func getGender(){
         let vc = viewGender()

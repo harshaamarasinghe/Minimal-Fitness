@@ -2,11 +2,11 @@ import UIKit
 
 class viewAge: UIViewController {
     
-    //Var
+    //Mark:- Variables
     
     var age : Int = 0
     
-    //UI Comps
+    //Mark:- UI Components
     
     let progressView : UIProgressView = {
         let progressView = UIProgressView(progressViewStyle: .bar)
@@ -96,11 +96,11 @@ class viewAge: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToDismiss)))
-        
         setupUI()
     }
+    
+    //Mark:- Functions
     
     func setupUI(){
         view.backgroundColor = .white
@@ -116,12 +116,12 @@ class viewAge: UIViewController {
         
         progressView.frame = CGRect(x: (view.frame.size.width)/8, y: 100, width: view.frame.size.width-100, height: 20)
         
-        //button actions
+        //Mark:- Button Actions
         
         buttonCont.addTarget(self, action: #selector(getNext), for: .touchUpInside)
         
         
-        //Constraints
+        //Mark:- Constraints
         
         NSLayoutConstraint.activate([
             labelOne.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -166,8 +166,6 @@ class viewAge: UIViewController {
         ])
     }
     
-    //button action
-    
     @objc func getNext(){
         let data = UserDefaults.standard
 
@@ -187,7 +185,6 @@ class viewAge: UIViewController {
     }
     
     @objc func didTapToDismiss() {
-            view.endEditing(true)
-        }
-    
+        view.endEditing(true)
+    }
 }

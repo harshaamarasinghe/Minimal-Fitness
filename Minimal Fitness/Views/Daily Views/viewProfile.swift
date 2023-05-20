@@ -1,8 +1,9 @@
-
 import UIKit
 import SnapKit
 
 class viewProfile: UIViewController {
+    
+    //Mark:- Components
     
     let labelProfile : UILabel = {
         let label = UILabel()
@@ -25,21 +26,15 @@ class viewProfile: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 36, weight: .thin)
         label.textColor = UIColor(red: 51/255, green: 51/255, blue: 51/255, alpha: 1.0)
-        
-        //label.text = "Profile"
         label.textAlignment = .center
         return label
     }()
-    
-    //rgba(72, 72, 72, 1)
     
     let labelAgeOne : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 26, weight: .thin)
         label.textColor = UIColor(red: 72/255, green: 72/255, blue: 72/255, alpha: 1.0)
-        
-        //label.text = "Profile"
         label.textAlignment = .center
         return label
     }()
@@ -63,14 +58,11 @@ class viewProfile: UIViewController {
         return stack
     }()
     
-    
     let labelWeightOne : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 26, weight: .thin)
         label.textColor = UIColor(red: 72/255, green: 72/255, blue: 72/255, alpha: 1.0)
-        
-        //label.text = "Profile"
         label.textAlignment = .center
         return label
     }()
@@ -80,8 +72,6 @@ class viewProfile: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 20, weight: .thin)
         label.textColor = UIColor(red: 72/255, green: 72/255, blue: 72/255, alpha: 1.0)
-        
-        
         label.text = "kg"
         label.textAlignment = .center
         return label
@@ -95,15 +85,11 @@ class viewProfile: UIViewController {
         return stack
     }()
     
-    
     let labelHeightOne : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 26, weight: .thin)
         label.textColor = UIColor(red: 72/255, green: 72/255, blue: 72/255, alpha: 1.0)
-        
-        
-        //label.text = "Profile"
         label.textAlignment = .center
         return label
     }()
@@ -113,8 +99,6 @@ class viewProfile: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 20, weight: .thin)
         label.textColor = UIColor(red: 72/255, green: 72/255, blue: 72/255, alpha: 1.0)
-        
-        
         label.text = "cm"
         label.textAlignment = .center
         return label
@@ -181,7 +165,6 @@ class viewProfile: UIViewController {
         return button
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -192,6 +175,8 @@ class viewProfile: UIViewController {
         labelHeightOne.text = "178"
     }
     
+    //Mark:- Functions
+    
     func setupUI(){
         view.backgroundColor = .white
         
@@ -199,7 +184,11 @@ class viewProfile: UIViewController {
         view.addSubview(image)
         view.addSubview(labelName)
         
+        //Mark:- Button Functions
+        
         buttonLogout.addTarget(self, action: #selector(logOut), for: .touchUpInside)
+        
+        buttonEdit.addTarget(self, action: #selector(editProfile), for: .touchUpInside)
         
         hStackAge.addArrangedSubview(labelAgeOne)
         hStackAge.addArrangedSubview(labelAgeTwo)
@@ -223,6 +212,8 @@ class viewProfile: UIViewController {
         view.addSubview(vStackRowTwo)
         view.addSubview(buttonLogout)
         
+        //Mark:- Constraints
+        
         labelProfile.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.centerX.equalTo(view)
@@ -242,7 +233,6 @@ class viewProfile: UIViewController {
         
         vStackRowTwo.snp.makeConstraints { make in
             make.top.equalTo(labelName.snp.bottom).offset(40)
-            //make.centerX.equalTo(view)
             make.left.equalTo(view.snp.left).offset(50)
         }
         
@@ -254,10 +244,15 @@ class viewProfile: UIViewController {
             make.top.equalTo(vStackRowTwo.snp.bottom).offset(40)
             make.centerX.equalTo(view)
             make.size.equalTo(CGSize(width: 180, height: 50))
-            //make.left.equalTo(view.snp.left).offset(50)
         }
         
     }
+    
+    @objc func editProfile(){
+        let vc = viewEditProfile()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     @objc func logOut() {
         let alert = UIAlertController(title: "Logout", message: "Are you sure you want to log out?", preferredStyle: .alert)
         
@@ -274,13 +269,9 @@ class viewProfile: UIViewController {
 
     func performLogout() {
         let vc = screenOne()
-        
         vc.hidesBottomBarWhenPushed = true
-        
         navigationController?.pushViewController(vc, animated: true)
     }
-
-    
 }
 
 

@@ -72,18 +72,16 @@ class viewHome: UIViewController {
         super.viewDidLoad()
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE" // Set the format to display the day of the week
+        dateFormatter.dateFormat = "EEEE"
         
-        let currentDate = Date() // Get the current date
-        dayOfWeek = dateFormatter.string(from: currentDate) // Get the day of the week
-        
-        labelTitleTwo.text = "It's \(dayOfWeek)" // Update the label text
+        let currentDate = Date()
+        dayOfWeek = dateFormatter.string(from: currentDate)
+        labelTitleTwo.text = "It's \(dayOfWeek)"
         
         chooseTheExerciseList()
         
         self.exerciseTable.delegate = self
         self.exerciseTable.dataSource = self
-        
         
         setupUI()
     }
@@ -142,9 +140,6 @@ class viewHome: UIViewController {
         else if(self.dayOfWeek == "Sunday"){readDocument(pathStr: "/exercises/gain-weight/day-seven")}
         
         else{readDocument(pathStr: "/exercises/gain-weight/day-one")}
-        
-        
-        
     }
     
     func readDocument(pathStr:String){

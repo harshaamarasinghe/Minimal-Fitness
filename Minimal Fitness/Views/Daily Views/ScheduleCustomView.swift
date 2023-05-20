@@ -34,15 +34,6 @@ class ScheduleCustomCell: UITableViewCell {
         label.text = "Error"
         return label
     }()
-    
-//    private let myImageViewTwo : UIImageView = {
-//        let image = UIImageView()
-//        image.translatesAutoresizingMaskIntoConstraints = false
-//        image.contentMode = .scaleAspectFit
-//        image.image = UIImage(systemName: "arrow.forward")
-//        image.tintColor = .darkGray
-//        return image
-//    }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -78,7 +69,6 @@ class ScheduleCustomCell: UITableViewCell {
         
         myLabel.snp.makeConstraints { make in
             make.top.equalTo(self.contentView.layoutMarginsGuide.snp.top)
-            //make.bottom.equalTo(self.contentView.layoutMarginsGuide.snp.bottom)
             make.left.equalTo(self.myImageView.snp.right).offset(20)
         }
         
@@ -88,12 +78,5 @@ class ScheduleCustomCell: UITableViewCell {
             make.left.equalTo(self.myImageView.snp.right).offset(20)
             
         }
-        
-//        myImageViewTwo.snp.makeConstraints { make in
-//            make.top.equalTo(self.contentView.layoutMarginsGuide.snp.top)
-//            make.bottom.equalTo(self.contentView.layoutMarginsGuide.snp.bottom)
-//            make.left.equalTo(self.myLabel.snp.right).offset(20)
-//            make.right.equalTo(self.contentView.layoutMarginsGuide.snp.right).offset(-20)
-//        }
     }
 }

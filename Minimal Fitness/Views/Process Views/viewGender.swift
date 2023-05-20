@@ -1,19 +1,12 @@
-//
-//  viewGender.swift
-//  Minimal Fitness
-//
-//  Created by Harsha Amarasinghe on 2023-03-28.
-//
-
 import UIKit
 
 class viewGender: UIViewController {
     
-    //Var
+    //Mark:- Variables
     
     var gender : String = ""
     
-    //UI Comps
+    //Mark:- UI Comps
     
     let progressView : UIProgressView = {
         let progressView = UIProgressView(progressViewStyle: .bar)
@@ -121,6 +114,8 @@ class viewGender: UIViewController {
         setupUI()
     }
     
+    //Mark:- Functions
+    
     func setupUI(){
         view.backgroundColor = .white
         view.addSubview(progressView)
@@ -137,13 +132,13 @@ class viewGender: UIViewController {
         
         progressView.frame = CGRect(x: (view.frame.size.width)/8, y: 100, width: view.frame.size.width-100, height: 20)
         
-        //Button Actions
+        //Mark:- Button Actions
         
         buttonMale.addTarget(self, action: #selector(propMale), for: .touchUpInside)
         buttonFemale.addTarget(self, action: #selector(propFemale), for: .touchUpInside)
         buttonCont.addTarget(self, action: #selector(getNext), for: .touchUpInside)
         
-        //Constraints
+        //Mark:- Constraints
         
         NSLayoutConstraint.activate([
             labelOne.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),

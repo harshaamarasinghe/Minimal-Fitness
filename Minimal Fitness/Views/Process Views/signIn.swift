@@ -2,7 +2,7 @@ import UIKit
 
 class signIn: UIViewController {
 
-    //UI Comps
+    //Mark:- UI Comps
     
     let labelOne : UILabel = {
         let label = UILabel()
@@ -54,7 +54,6 @@ class signIn: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "apple"), for: .normal)
-        //button.imageView?.contentMode = .scaleAspectFit
         button.setTitle("   Continue with Apple", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         button.backgroundColor = UIColor(red: 69/255, green: 90/255, blue: 100/255, alpha: 1.0)
@@ -97,6 +96,8 @@ class signIn: UIViewController {
         
     }
 
+    //Mark:- Funcs
+    
     func setupUI(){
         view.backgroundColor = .white
         view.addSubview(labelOne)
@@ -111,12 +112,11 @@ class signIn: UIViewController {
         
         view.addSubview(hStack)
         
-        //button actions
+        //Mark:- button actions
         
         buttonSU.addTarget(self, action: #selector(getSignUp), for: .touchUpInside)
-       
         
-        //constraints
+        //Mark:- constraints
         NSLayoutConstraint.activate([
             labelOne.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             labelOne.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
@@ -153,7 +153,7 @@ class signIn: UIViewController {
             hStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
-    //button actions
+    //Mark:- Functions
     
     @objc func getSignUp(){
         let vc = signup()

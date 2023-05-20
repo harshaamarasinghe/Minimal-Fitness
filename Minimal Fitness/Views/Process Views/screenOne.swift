@@ -2,7 +2,7 @@ import UIKit
 
 class screenOne: UIViewController {
     
-    //UI Comps
+    //Mark:- UI Comps
     
     let labelOne : UILabel = {
         let label = UILabel()
@@ -96,7 +96,7 @@ class screenOne: UIViewController {
         
         view.addSubview(hStack)
 
-        //button actions
+        //Mark:- button actions
         buttonGS.addTarget(self, action: #selector(getStarted), for: .touchUpInside)
         buttonSI.addTarget(self, action: #selector(getSignIn), for: .touchUpInside)
         
@@ -135,7 +135,7 @@ class screenOne: UIViewController {
         ])
     }
     
-    //button actions
+    //Mark:- Functions
     
     @objc func getStarted(){
         let vc = signup()
