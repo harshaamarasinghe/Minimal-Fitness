@@ -154,10 +154,7 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         weightPicker.dataSource = self
         
         setupUI()
-        
-        
     }
-    
     
     //Mark:- Youtube Video Player
     
@@ -271,16 +268,16 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     // MARK: - UIPickerViewDelegate & UIPickerViewDataSource
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1 // Number of components in the picker
+        return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView == repetitionsPicker {
-            return repetitionsData.count // Number of rows in the repetitions picker
+            return repetitionsData.count
         } else if pickerView == setsPicker {
-            return setData.count // Number of rows in the sets picker
+            return setData.count
         }else if pickerView == weightPicker {
-            return weightData.count // Number of rows in the weight picker
+            return weightData.count
         }
         else {
             return 0
@@ -306,15 +303,12 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     //Mark:- Functions for startButton
     
     @objc func startButtonTapped() {
-        // Create and present the UIAlertController
         let alertController = UIAlertController(title: "Workout Stopwatch", message: nil, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Finish", style: .default, handler: { (_) in
             self.stopTimer()
             self.finishStopwatch(alertController)
         }))
         present(alertController, animated: true, completion: nil)
-        
-        // Start the stopwatch
         startTimer()
     }
     
@@ -330,7 +324,6 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     func stopTimer() {
         timer?.invalidate()
         timer = nil
-        
     }
     
     func formatElapsedTime(_ elapsedTime: TimeInterval) -> String {
@@ -341,9 +334,8 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     
     func finishStopwatch(_ alertController: UIAlertController) {
         alertController.dismiss(animated: true, completion: nil)
-        
-        // Perform any additional actions after the stopwatch finishes
-        // For example, navigate to a new view controller or update UI
+        let vc = viewHome()
+        navigationController?.popViewController(animated: true)
         
         print("Total elapsed time: \(formatElapsedTime(elapsedTime))")
         elapsedTime = 0.0
