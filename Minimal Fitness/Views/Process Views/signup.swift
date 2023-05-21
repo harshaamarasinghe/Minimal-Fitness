@@ -43,7 +43,7 @@ class signup: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "search"), for: .normal)
-        button.setTitle("Continue with Google", for: .normal)
+        button.setTitle("   Continue with Google", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         button.backgroundColor = UIColor(red: 69/255, green: 90/255, blue: 100/255, alpha: 1.0)
         button.layer.cornerRadius = 10
@@ -54,7 +54,7 @@ class signup: UIViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "apple"), for: .normal)
-        button.setTitle("Continue with Apple", for: .normal)
+        button.setTitle("   Continue with Apple", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         button.backgroundColor = UIColor(red: 69/255, green: 90/255, blue: 100/255, alpha: 1.0)
         button.layer.cornerRadius = 10
