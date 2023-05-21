@@ -96,7 +96,12 @@ class viewAge: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        //self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToDismiss)))
+        setupNavigationBar()
         setupUI()
     }
     
@@ -186,5 +191,16 @@ class viewAge: UIViewController {
     
     @objc func didTapToDismiss() {
         view.endEditing(true)
+    }
+    
+    // MARK: - Navigation Bar Setup
+    
+    func setupNavigationBar() {
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem = backButton
+    }
+    
+    @objc func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
     }
 }

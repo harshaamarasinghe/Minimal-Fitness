@@ -111,6 +111,7 @@ class viewGender: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.setHidesBackButton(true, animated: true)
+        setupNavigationBar()
         setupUI()
     }
     
@@ -227,6 +228,15 @@ class viewGender: UIViewController {
             navigationController?.pushViewController(vc, animated: true)
         }
     }
+    // MARK: - Navigation Bar Setup
     
+    func setupNavigationBar() {
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem = backButton
+    }
+    
+    @objc func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
+    }
     
 }

@@ -159,11 +159,9 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     }
     
     
-    
+    //Mark:- Youtube Video Player
     
     func youtubeVideoView(){
-        
-        
         let embedHTML = "<html><body><iframe width=\"980\" height=\"500\" src=\"https://www.youtube.com/embed/\(videoId)?playsinline=1\" frameborder=\"0\" allowfullscreen></iframe></body></html>"
         webView.loadHTMLString(embedHTML, baseURL: nil)
     }

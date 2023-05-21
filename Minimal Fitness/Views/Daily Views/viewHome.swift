@@ -71,6 +71,8 @@ class viewHome: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE"
         
@@ -143,7 +145,6 @@ class viewHome: UIViewController {
     }
     
     func readDocument(pathStr:String){
-        
         db.collection(pathStr).getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -153,11 +154,13 @@ class viewHome: UIViewController {
                     self.dataArray.append(data)
                 }
                 
+                //Function calls to save data in seperate arrays
                 self.saveNameArray()
                 self.saveDescArray()
                 self.savePicArray()
                 self.saveVideoArray()
                 
+                //Refresh the tableView
                 self.exerciseTable.reloadData()
             }
         }

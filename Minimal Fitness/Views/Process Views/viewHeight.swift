@@ -129,7 +129,11 @@ class viewHeight: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        //self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToDismiss)))
+        setupNavigationBar()
         setupUI()
     }
     
@@ -203,9 +207,7 @@ class viewHeight: UIViewController {
             hStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             buttonCm.heightAnchor.constraint(equalToConstant: 56),
             buttonCm.widthAnchor.constraint(equalToConstant: 70),
-//            buttonLbs.heightAnchor.constraint(equalToConstant: 56),
-//            buttonLbs.widthAnchor.constraint(equalToConstant: 70),
-//
+
             buttonCont.topAnchor.constraint(equalTo: buttonCm.bottomAnchor, constant: 20),
             buttonCont.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             buttonCont.heightAnchor.constraint(equalToConstant: 50),
@@ -220,13 +222,6 @@ class viewHeight: UIViewController {
         type = "cm"
     }
     
-//    @objc func btnLbs(){
-//        buttonLbs.backgroundColor = UIColor(red: 182/255, green: 162/255, blue: 245/255, alpha: 1.0)
-//        buttonKg.backgroundColor = UIColor(red: 204/255, green: 190/255, blue: 248/255, alpha: 1.0)
-//
-//        type = "lbs"
-//    }
-    //button action
     
     @objc func getNext(){
         let data = UserDefaults.standard
@@ -249,4 +244,15 @@ class viewHeight: UIViewController {
     @objc func didTapToDismiss() {
             view.endEditing(true)
         }
+    
+    // MARK: - Navigation Bar Setup
+    
+    func setupNavigationBar() {
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem = backButton
+    }
+    
+    @objc func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
+    }
 }

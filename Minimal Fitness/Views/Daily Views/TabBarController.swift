@@ -11,12 +11,13 @@ class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         self.setupTab()
         
         self.tabBar.backgroundColor = .white
         self.tabBar.tintColor = .orange
-//        self.tabBar.unselectedItemTintColor = .purple
     }
     
 

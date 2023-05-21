@@ -1,10 +1,10 @@
 import UIKit
 
 class signup: UIViewController {
-
-    //Mark:- UI Comps
-
-    let labelOne : UILabel = {
+    
+    // MARK: - UI Components
+    
+    let labelOne: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 36, weight: .thin)
@@ -13,7 +13,7 @@ class signup: UIViewController {
         return label
     }()
     
-    let labelTwo : UILabel = {
+    let labelTwo: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 14, weight: .semibold)
@@ -30,7 +30,7 @@ class signup: UIViewController {
         return imageView
     }()
     
-    let labelThree : UILabel = {
+    let labelThree: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 40, weight: .thin)
@@ -39,29 +39,39 @@ class signup: UIViewController {
         return label
     }()
     
-    let buttonGoogle : UIButton = {
+    let buttonGoogle: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "search"), for: .normal)
-        button.setTitle("   Continue with Google", for: .normal)
+        button.setTitle("Continue with Google", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         button.backgroundColor = UIColor(red: 69/255, green: 90/255, blue: 100/255, alpha: 1.0)
         button.layer.cornerRadius = 10
         return button
     }()
     
-    let buttonApple : UIButton = {
+    let buttonApple: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "apple"), for: .normal)
-        button.setTitle("   Continue with Apple", for: .normal)
+        button.setTitle("Continue with Apple", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
         button.backgroundColor = UIColor(red: 69/255, green: 90/255, blue: 100/255, alpha: 1.0)
         button.layer.cornerRadius = 10
         return button
     }()
     
-    let labelFour : UILabel = {
+    let buttonEmail: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Sign up using email", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
+        button.backgroundColor = UIColor(red: 69/255, green: 90/255, blue: 100/255, alpha: 1.0)
+        button.layer.cornerRadius = 10
+        return button
+    }()
+    
+    let labelFour: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 14, weight: .semibold)
@@ -71,7 +81,7 @@ class signup: UIViewController {
         return label
     }()
     
-    let buttonSI : UIButton = {
+    let buttonSI: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Sign in", for: .normal)
@@ -81,7 +91,7 @@ class signup: UIViewController {
         return button
     }()
     
-    let hStack : UIStackView = {
+    let hStack: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .horizontal
@@ -89,15 +99,17 @@ class signup: UIViewController {
         return stack
     }()
     
+    // MARK: - Lifecycle Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.setHidesBackButton(true, animated: true)
         setupUI()
     }
-
-    //Mark:- Functions
     
-    func setupUI(){
+    // MARK: - UI Setup
+    
+    func setupUI() {
         view.backgroundColor = .white
         view.addSubview(labelOne)
         view.addSubview(labelTwo)
@@ -105,23 +117,25 @@ class signup: UIViewController {
         view.addSubview(labelThree)
         view.addSubview(buttonGoogle)
         view.addSubview(buttonApple)
+        view.addSubview(buttonEmail)
         
         hStack.addArrangedSubview(labelFour)
         hStack.addArrangedSubview(buttonSI)
         
         view.addSubview(hStack)
         
-        //Mark:- button actions
-        
+        // Button Actions
         buttonSI.addTarget(self, action: #selector(getSignIn), for: .touchUpInside)
         buttonGoogle.addTarget(self, action: #selector(getGender), for: .touchUpInside)
+        buttonApple.addTarget(self, action: #selector(getGender), for: .touchUpInside)
+        buttonEmail.addTarget(self, action: #selector(signUpWithEmail), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             labelOne.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             labelOne.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             labelOne.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             labelOne.heightAnchor.constraint(equalToConstant: 40),
-
+            
             labelTwo.topAnchor.constraint(equalTo: labelOne.bottomAnchor),
             labelTwo.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             labelTwo.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
@@ -147,18 +161,30 @@ class signup: UIViewController {
             buttonApple.heightAnchor.constraint(equalToConstant: 50),
             buttonApple.widthAnchor.constraint(equalToConstant: 227),
             
-            hStack.topAnchor.constraint(equalTo: buttonApple.bottomAnchor),
+            buttonEmail.topAnchor.constraint(equalTo: buttonApple.bottomAnchor, constant: 10),
+            buttonEmail.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 70),
+            buttonEmail.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -70),
+            buttonEmail.heightAnchor.constraint(equalToConstant: 50),
+            
+            hStack.topAnchor.constraint(equalTo: buttonEmail.bottomAnchor),
             hStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
     
-    @objc func getGender(){
+    // MARK: - Button Actions
+    
+    @objc func getGender() {
         let vc = viewGender()
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc func getSignIn(){
+    @objc func getSignIn() {
         let vc = signIn()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func signUpWithEmail() {
+        let vc = emailSignupViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
 }

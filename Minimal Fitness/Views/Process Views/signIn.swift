@@ -39,6 +39,17 @@ class signIn: UIViewController {
         return label
     }()
     
+    let buttonEmail: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Sign in with Email", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
+        button.backgroundColor = UIColor(red: 69/255, green: 90/255, blue: 100/255, alpha: 1.0)
+        button.layer.cornerRadius = 10
+        return button
+    }()
+
+    
     let buttonGoogle : UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -106,6 +117,8 @@ class signIn: UIViewController {
         view.addSubview(labelThree)
         view.addSubview(buttonGoogle)
         view.addSubview(buttonApple)
+        view.addSubview(buttonEmail)
+
         
         hStack.addArrangedSubview(labelFour)
         hStack.addArrangedSubview(buttonSU)
@@ -115,6 +128,11 @@ class signIn: UIViewController {
         //Mark:- button actions
         
         buttonSU.addTarget(self, action: #selector(getSignUp), for: .touchUpInside)
+        buttonGoogle.addTarget(self, action: #selector(getSignIn), for: .touchUpInside)
+        buttonApple.addTarget(self, action: #selector(getSignIn), for: .touchUpInside)
+        buttonEmail.addTarget(self, action: #selector(getSignInWithEmail), for: .touchUpInside)
+
+        
         
         //Mark:- constraints
         NSLayoutConstraint.activate([
@@ -148,12 +166,28 @@ class signIn: UIViewController {
             buttonApple.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -70),
             buttonApple.heightAnchor.constraint(equalToConstant: 50),
             buttonApple.widthAnchor.constraint(equalToConstant: 227),
+   
+            buttonEmail.topAnchor.constraint(equalTo: buttonApple.bottomAnchor, constant: 10),
+            buttonEmail.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 70),
+            buttonEmail.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -70),
+            buttonEmail.heightAnchor.constraint(equalToConstant: 50),
+            buttonEmail.widthAnchor.constraint(equalToConstant: 227),
             
-            hStack.topAnchor.constraint(equalTo: buttonApple.bottomAnchor),
+            hStack.topAnchor.constraint(equalTo: buttonEmail.bottomAnchor),
             hStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
     //Mark:- Functions
+    
+    @objc func getSignIn(){
+        let vc = TabBarController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func getSignInWithEmail(){
+        let vc = emailSignInViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
     @objc func getSignUp(){
         let vc = signup()

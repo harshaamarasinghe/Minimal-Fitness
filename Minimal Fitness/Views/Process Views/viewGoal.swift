@@ -130,6 +130,9 @@ class viewGoal: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        //self.navigationController?.setNavigationBarHidden(true, animated: true)
+        setupNavigationBar()
         setupUI()
     }
     
@@ -255,6 +258,15 @@ class viewGoal: UIViewController {
         }
     }
     
-
+    // MARK: - Navigation Bar Setup
+    
+    func setupNavigationBar() {
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem = backButton
+    }
+    
+    @objc func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
+    }
     
 }
