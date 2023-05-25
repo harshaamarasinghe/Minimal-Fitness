@@ -1,8 +1,14 @@
 import UIKit
 import SnapKit
+import FirebaseFirestore
 
 class viewEditProfile: UIViewController {
 
+    //MARK: - Variables
+    
+    let db = Firestore.firestore()
+    
+    
     //Mark:- Components
     
     let labelTitle : UILabel = {
@@ -94,7 +100,7 @@ class viewEditProfile: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.tintColor = .orange
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToDismiss)))
+        //view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToDismiss)))
         setupUI()
     }
     
@@ -112,6 +118,9 @@ class viewEditProfile: UIViewController {
         view.addSubview(labelHeight)
         view.addSubview(textFieldHeight)
         view.addSubview(buttonUpdate)
+        
+        
+        buttonUpdate.addTarget(self, action: #selector(updateProcess), for: .touchUpInside)
         
         //Mark:- Constraints
         
@@ -171,7 +180,64 @@ class viewEditProfile: UIViewController {
         
     }
 
-    @objc func didTapToDismiss() {
-        view.endEditing(true)
+    @objc func updateProcess() {
+        let data = UserDefaults.standard
+        let email = data.string(forKey: "email")
+        
+        guard let age = textFieldAge.text, !age.isEmpty,
+              let height = textFieldHeight.text, !height.isEmpty,
+              let weight = textFieldWeight.text, !weight.isEmpty else {
+            showAlert(message: "Please fill in all fields.")
+            return
+        }
+        
+        updateData(email: email!, age: age, height: height, weight: weight) { success in
+            if success {
+                DispatchQueue.main.async {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            } else {
+                self.showAlert(message: "Failed to update data.")
+            }
+        }
+    }
+
+    func updateData(email: String, age: String, height: String, weight: String, completion: @escaping (Bool) -> Void) {
+        let docRef = db.collection("users").whereField("email", isEqualTo: email)
+        
+        docRef.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+                completion(false)
+                return
+            }
+            
+            guard let document = querySnapshot?.documents.first else {
+                print("Document not found")
+                completion(false)
+                return
+            }
+            
+            document.reference.updateData([
+                "age": age,
+                "height": height,
+                "weight": weight
+            ]) { error in
+                if let error = error {
+                    print("Error updating document: \(error)")
+                    completion(false)
+                } else {
+                    print("Document updated successfully")
+                    completion(true)
+                }
+            }
+        }
+    }
+
+    func showAlert(message: String) {
+        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
     }
 }
