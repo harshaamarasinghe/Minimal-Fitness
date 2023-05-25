@@ -8,7 +8,7 @@ class viewEditProfile: UIViewController {
     
     let db = Firestore.firestore()
     
-    
+    var dataUpdatedCompletion: (() -> Void)?
     //Mark:- Components
     
     let labelTitle : UILabel = {
@@ -195,6 +195,7 @@ class viewEditProfile: UIViewController {
             if success {
                 DispatchQueue.main.async {
                     self.navigationController?.popViewController(animated: true)
+                    self.dataUpdatedCompletion?()
                 }
             } else {
                 self.showAlert(message: "Failed to update data.")

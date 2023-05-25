@@ -260,6 +260,9 @@ class viewProfile: UIViewController {
         vc.textFieldAge.placeholder = self.age
         vc.textFieldHeight.placeholder = self.height
         vc.textFieldWeight.placeholder = self.weight
+        vc.dataUpdatedCompletion = {
+            self.getUserDataFirebase()
+        }
         navigationController?.pushViewController(vc, animated: true)
     }
     
