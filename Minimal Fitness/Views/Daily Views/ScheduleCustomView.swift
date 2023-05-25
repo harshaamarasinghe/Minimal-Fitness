@@ -70,13 +70,15 @@ class ScheduleCustomCell: UITableViewCell {
         myLabel.snp.makeConstraints { make in
             make.top.equalTo(self.contentView.layoutMarginsGuide.snp.top)
             make.left.equalTo(self.myImageView.snp.right).offset(20)
+            make.right.equalTo(self.contentView.snp.right).offset(-20)
+            
         }
         
         myLabelMini.snp.makeConstraints { make in
-            make.top.equalTo(myLabel.snp.top)
+            make.top.equalTo(myLabel.snp.top).offset(10)
             make.bottom.equalTo(self.contentView.layoutMarginsGuide.snp.bottom)
             make.left.equalTo(self.myImageView.snp.right).offset(20)
-            
+            make.right.equalTo(self.contentView.snp.right).offset(-20)
         }
     }
 }

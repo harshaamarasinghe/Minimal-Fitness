@@ -183,7 +183,7 @@ class viewAge: UIViewController {
             return
         }
         
-        data.set(age, forKey: "Age")
+        data.set(ageString, forKey: "Age")
         
         let vc = viewWeight() 
         navigationController?.pushViewController(vc, animated: true)

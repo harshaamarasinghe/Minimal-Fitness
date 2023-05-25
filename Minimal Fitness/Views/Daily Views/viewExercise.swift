@@ -334,7 +334,6 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     
     func finishStopwatch(_ alertController: UIAlertController) {
         alertController.dismiss(animated: true, completion: nil)
-        let vc = viewHome()
         navigationController?.popViewController(animated: true)
         
         print("Total elapsed time: \(formatElapsedTime(elapsedTime))")

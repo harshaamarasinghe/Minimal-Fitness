@@ -55,7 +55,7 @@ class viewEditProfile: UIViewController {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
-        textField.placeholder = "25 yrs"
+        //textField.placeholder = "25 yrs"
         textField.keyboardType = .numberPad
         textField.font = .systemFont(ofSize: 26)
         return textField
@@ -65,7 +65,7 @@ class viewEditProfile: UIViewController {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
-        textField.placeholder = "60 kg"
+        //textField.placeholder = "60 kg"
         textField.keyboardType = .numberPad
         textField.font = .systemFont(ofSize: 26)
         return textField
@@ -76,7 +76,7 @@ class viewEditProfile: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
         textField.font = .systemFont(ofSize: 26)
-        textField.placeholder = "178 cm"
+        //textField.placeholder = "178 cm"
         textField.keyboardType = .numberPad
         return textField
     }()

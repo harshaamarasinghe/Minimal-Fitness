@@ -234,7 +234,7 @@ class viewHeight: UIViewController {
             return
         }
         
-        data.set(height, forKey: "Height")
+        data.set(heightString, forKey: "Height")
         
         
         let vc = viewLevel()

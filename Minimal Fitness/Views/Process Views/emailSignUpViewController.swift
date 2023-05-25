@@ -1,6 +1,15 @@
 import UIKit
+import FirebaseFirestore
 
 class emailSignupViewController: UIViewController {
+    
+    // MARK: - Variable
+    
+    let db = Firestore.firestore()
+    
+    var dataArray: [[String: Any]] = []
+    var emailDataArray: [String] = []
+    var password: String = ""
     
     // MARK: - UI Components
     
@@ -65,6 +74,7 @@ class emailSignupViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getEmailData()
         setupUI()
         setupActions()
         setupNavigationBar()
@@ -149,16 +159,18 @@ class emailSignupViewController: UIViewController {
         
         // Perform signup logic here
         
+        self.controlSignUp(emailData: emailTextField.text!)
+        
+        self.password = passwordTextField.text!
+        
         // Reset text fields
         emailTextField.text = ""
         passwordTextField.text = ""
         confirmPasswordTextField.text = ""
         
-        // Show success message
-        displayAlert(message: "Sign up successful!")
+    
         
-        let vc = viewGender()
-        navigationController?.pushViewController(vc, animated: true)
+       
     }
     
     func isValidEmail(_ email: String) -> Bool {
@@ -186,4 +198,83 @@ class emailSignupViewController: UIViewController {
     @objc func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
+    
+    func controlSignUp(emailData:String){
+        
+        let email = emailData
+        compareEmailData(emailData: email)
+        
+    }
+    
+    func getEmailData(){
+        
+        
+        db.collection("/users").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let data = document.data()
+                    self.dataArray.append(data)
+                }
+                self.saveEmailToArray()
+            }
+        }
+    }
+    
+    func saveEmailToArray() {
+        for data in dataArray {
+            self.emailDataArray.append(data["email"] as! String)
+        }
+    }
+    
+    func compareEmailData(emailData:String){
+        var isMatchFound = false
+        
+        print("Hello",emailData)
+        
+        for data in emailDataArray {
+            print("This is emails:",data)
+            if data == emailData {
+                let alertController = UIAlertController(title: emailData, message: "The email address has already been used!", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alertController.addAction(okAction)
+                present(alertController, animated: true, completion: nil)
+                isMatchFound = true
+                break
+            }
+        }
+        
+        if !isMatchFound {
+            let alertController = UIAlertController(title: "Successfully Registered!", message: nil, preferredStyle: .alert)
+            //let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+                        self?.setUserData(email: emailData)
+                    }
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+            
+           
+        }
+    }
+    
+    func setUserData(email:String){
+        
+        print("Called")
+        
+        let userData = UserDefaults.standard
+        
+        userData.set(email, forKey: "email")
+        userData.set(password, forKey: "password")
+        
+        genderVC()
+    }
+    
+    func genderVC(){
+        
+        print("Called")
+        let vc = viewGender()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }

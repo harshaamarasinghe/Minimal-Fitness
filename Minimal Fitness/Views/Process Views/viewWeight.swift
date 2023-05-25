@@ -223,7 +223,7 @@ class viewWeight: UIViewController {
             return
         }
         
-        data.set(weight, forKey: "Weight")
+        data.set(weightString, forKey: "Weight")
         
         
         let vc = viewHeight()

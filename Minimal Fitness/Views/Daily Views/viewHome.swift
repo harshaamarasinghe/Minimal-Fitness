@@ -15,7 +15,11 @@ class viewHome: UIViewController {
     var picDataArray: [String] = []
     var videoDataArray: [String] = []
     
+    var userDataArray:[[String: Any]] = []
+    
     var dayOfWeek: String = "Monday"
+    var userBMI: String = "gain-weight"
+    
     
     //Mark:- Components
     
@@ -72,6 +76,7 @@ class viewHome: UIViewController {
         super.viewDidLoad()
         
         self.navigationItem.setHidesBackButton(true, animated: true)
+        getUserDataFirebase()
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE"
@@ -79,8 +84,6 @@ class viewHome: UIViewController {
         let currentDate = Date()
         dayOfWeek = dateFormatter.string(from: currentDate)
         labelTitleTwo.text = "It's \(dayOfWeek)"
-        
-        chooseTheExerciseList()
         
         self.exerciseTable.delegate = self
         self.exerciseTable.dataSource = self
@@ -133,13 +136,44 @@ class viewHome: UIViewController {
     //Mark:- getting the correct list of exercises
     func chooseTheExerciseList(){
         
-        if(self.dayOfWeek == "Monday"){readDocument(pathStr: "/exercises/gain-weight/day-one")}
-        else if(self.dayOfWeek == "Tuesday"){readDocument(pathStr: "/exercises/gain-weight/day-two")}
-        else if(self.dayOfWeek == "Wednesday"){ readDocument(pathStr: "/exercises/gain-weight/day-three")}
-        else if(self.dayOfWeek == "Thursday"){readDocument(pathStr: "/exercises/gain-weight/day-four")}
-        else if(self.dayOfWeek == "Friday"){readDocument(pathStr: "/exercises/gain-weight/day-five")}
-        else if(self.dayOfWeek == "Saturday"){readDocument(pathStr: "/exercises/gain-weight/day-six")}
-        else if(self.dayOfWeek == "Sunday"){readDocument(pathStr: "/exercises/gain-weight/day-seven")}
+        let dc = "/exercises/"
+        
+        if(self.dayOfWeek == "Monday"){
+            let day = "/day-one"
+            let pathStr = dc + self.userBMI + day
+            readDocument(pathStr: pathStr)
+        }
+        else if(self.dayOfWeek == "Tuesday"){
+            let day = "/day-two"
+            let pathStr = dc + self.userBMI + day
+            readDocument(pathStr: pathStr)
+        }
+        else if(self.dayOfWeek == "Wednesday"){
+            let day = "/day-three"
+            let pathStr = dc + self.userBMI + day
+            readDocument(pathStr: pathStr)
+            //print(pathStr)
+        }
+        else if(self.dayOfWeek == "Thursday"){
+            let day = "/day-four"
+            let pathStr = dc + self.userBMI + day
+            readDocument(pathStr: pathStr)
+        }
+        else if(self.dayOfWeek == "Friday"){
+            let day = "/day-five"
+            let pathStr = dc + self.userBMI + day
+            readDocument(pathStr: pathStr)
+        }
+        else if(self.dayOfWeek == "Saturday"){
+            let day = "/day-six"
+            let pathStr = dc + self.userBMI + day
+            readDocument(pathStr: pathStr)
+        }
+        else if(self.dayOfWeek == "Sunday"){
+            let day = "/day-seven"
+            let pathStr = dc + self.userBMI + day
+            readDocument(pathStr: pathStr)
+        }
         
         else{readDocument(pathStr: "/exercises/gain-weight/day-one")}
     }
@@ -197,6 +231,73 @@ class viewHome: UIViewController {
             print(data)
         }
     }
+    
+//    func getUserDataFromFirebase(){
+//        db.collection("/users").getDocuments() { (querySnapshot, err) in
+//            if let err = err {
+//                print("Error getting documents: \(err)")
+//            } else {
+//                for document in querySnapshot!.documents {
+//                    let data = document.data()
+//                    self.dataArray.append(data)
+//                }
+//
+//                //Function calls to save data in seperate arrays
+//                self.saveNameArray()
+//                self.saveDescArray()
+//                self.savePicArray()
+//                self.saveVideoArray()
+//
+//                //Refresh the tableView
+//                self.exerciseTable.reloadData()
+//            }
+//        }
+//    }
+    
+    @objc func getNext(name:String,desc:String,video:String) {
+        let vc = viewExercise()
+        vc.labelWorkout.text = name
+        vc.labelDesc.text = desc
+        vc.videoId = video
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func getUserDataFirebase() {
+        
+        let data = UserDefaults.standard
+        
+        let email = data.string(forKey: "emailData")
+        
+        let userRef = db.collection("users")
+        let query = userRef.whereField("email", isEqualTo: email as Any)
+
+        query.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+                return
+            }
+
+            guard let documents = querySnapshot?.documents else {
+                print("No documents found")
+                return
+            }
+
+            if let userDocument = documents.first {
+                // Email exists in the database
+                let bmi = userDocument.data()["bmi"] as? String ?? ""
+                
+                
+                self.userBMI = bmi
+                print("BMI Goal: \(self.userBMI)")
+                self.chooseTheExerciseList()
+            } else {
+                
+                print("BMI Goal: No BMI")
+            }
+        }
+    }
+
 }
 
 extension viewHome : UITableViewDelegate, UITableViewDataSource{
@@ -232,14 +333,7 @@ extension viewHome : UITableViewDelegate, UITableViewDataSource{
     }
     
     
-    @objc func getNext(name:String,desc:String,video:String) {
-        let vc = viewExercise()
-        vc.labelWorkout.text = name
-        vc.labelDesc.text = desc
-        vc.videoId = video
-        
-        navigationController?.pushViewController(vc, animated: true)
-    }
+    
     
 }
 

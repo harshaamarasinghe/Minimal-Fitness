@@ -1,14 +1,16 @@
 import UIKit
 import SnapKit
+import FirebaseFirestore
 
 class viewBMI: UIViewController {
     
-    //Var
+    //MARK: - Variables
+    let db = Firestore.firestore()
     
     var BMI = 1.2;
-    //    var color = UIColor(red: 255/255, green: 114/255, blue: 94/255, alpha: 1.0)
+    var bmiStr = ""
     
-    //UI Comps
+    //MARK: - UI Components
     
     let labelOne : UILabel = {
         let label = UILabel()
@@ -74,7 +76,6 @@ class viewBMI: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 28, weight: .regular)
-        //label.text = "Underweight"
         label.textAlignment = .center
         label.textColor = .white
         label.backgroundColor = UIColor(red: 1/255, green: 166/255, blue: 170/255, alpha: 1.0)
@@ -96,7 +97,6 @@ class viewBMI: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 28, weight: .regular)
-        //label.text = "Gain Muscle"
         label.textAlignment = .center
         label.textColor = .white
         label.backgroundColor = UIColor(red: 255/255, green: 114/255, blue: 94/255, alpha: 1.0)
@@ -227,28 +227,34 @@ class viewBMI: UIViewController {
         
         print(weight, height, bmi, bmiDouble)
         
+        
+        
         if(bmiDouble<18.5){
             labelFive.text = "Underweight"
             labelSeven.text = "Gain Muscle"
+            bmiStr = "gain-weight"
         } else if bmiDouble < 25 {
             labelFive.text = "Normal Weight"
             labelSeven.text = "Gain Muscle"
+            bmiStr = "gain-weight"
         } else if bmiDouble < 30 {
             labelFive.text = "Overweight"
             labelSeven.text = "Lose Weight"
+            bmiStr = "loseweight"
         } else {
             labelFive.text = "Obese"
             labelSeven.text = "Lose Weight"
+            bmiStr = "loseweight"
         }
+        
+        data.set(bmiStr, forKey: "bmi")
     }
     
     @objc func getNext() {
         
-      
+        saveDataOnTheDatabase()
         
         let tabBarController = UITabBarController()
-        
-        
         
         let home = UINavigationController(rootViewController: viewHome())
         let schedule = UINavigationController(rootViewController: viewSchedule())
@@ -291,6 +297,47 @@ class viewBMI: UIViewController {
     
     @objc func backButtonTapped() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    func saveDataOnTheDatabase(){
+        getDataFromUserDefaults()
+    }
+    
+    func getDataFromUserDefaults(){
+        let data = UserDefaults.standard
+        
+        let email = data.string(forKey: "email")!
+        let password = data.string(forKey: "password")
+        let gender = data.string(forKey: "Gender")
+        let age = data.string(forKey: "Age")
+        let weight = data.string(forKey: "Weight")!
+        let height = data.string(forKey: "Height")
+        let level = data.string(forKey: "Level")
+        let goal = data.string(forKey: "Goal")
+        
+        saveData(email: email, password: password!, gender: gender!, age: age!, weight: weight, height: height!, level: level!, goal: goal!, bmiStr: bmiStr)
+    }
+    
+    func saveData(email:String,password:String,gender:String,age:String,weight:String,height:String,level:String,goal:String,bmiStr:String){
+        let data: [String: Any] = [
+            "email": email,
+            "password" : password,
+            "gender" : gender,
+            "age" : age,
+            "weight" : weight,
+            "height" : height,
+            "level" : level,
+            "goal" : goal,
+            "bmi" : bmiStr
+        ]
+        
+        db.collection("/users").addDocument(data: data) { error in
+            if let error = error {
+                print("Error adding document: \(error)")
+            } else {
+                print("Document added")
+            }
+        }
     }
     
 }

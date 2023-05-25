@@ -1,8 +1,13 @@
 import UIKit
+import FirebaseFirestore
 
 class emailSignInViewController: UIViewController {
     
-    // UI Components
+    //MARK: - Variables
+    
+    let db = Firestore.firestore()
+    
+    //MARK: - UI Components
     
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -101,15 +106,64 @@ class emailSignInViewController: UIViewController {
         passwordTextField.addTarget(self, action: #selector(validateInput), for: .editingChanged)
     }
     
+//    @objc func signInButtonTapped() {
+//        guard let email = emailTextField.text, let password = passwordTextField.text else {
+//
+//            return
+//        }
+//
+//        if isValidEmail(email) && isValidPassword(password) {
+//            let nextViewController = TabBarController()
+//            navigationController?.pushViewController(nextViewController, animated: true)
+//        } else {
+//            let alertController = UIAlertController(title: "Error", message: "Invalid email or password", preferredStyle: .alert)
+//            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+//            alertController.addAction(okAction)
+//            present(alertController, animated: true, completion: nil)
+//        }
+//    }
+    
     @objc func signInButtonTapped() {
+        
+        let data = UserDefaults.standard
+        
         guard let email = emailTextField.text, let password = passwordTextField.text else {
-            
             return
         }
         
         if isValidEmail(email) && isValidPassword(password) {
-            let nextViewController = TabBarController()
-            navigationController?.pushViewController(nextViewController, animated: true)
+            // Validate email and password
+            let userRef = db.collection("users")
+            let query = userRef.whereField("email", isEqualTo: email)
+            
+            query.getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                    return
+                }
+                
+                guard let documents = querySnapshot?.documents else {
+                    print("No documents found")
+                    return
+                }
+                
+                if let userDocument = documents.first,
+                   let storedPassword = userDocument.data()["password"] as? String,
+                   storedPassword == password {
+                    // Email and password are correct
+                    
+                    data.set(email, forKey: "emailData")
+                    
+                    let nextViewController = TabBarController()
+                    self.navigationController?.pushViewController(nextViewController, animated: true)
+                } else {
+                    // Email or password is incorrect
+                    let alertController = UIAlertController(title: "Error", message: "Invalid email or password", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alertController.addAction(okAction)
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            }
         } else {
             let alertController = UIAlertController(title: "Error", message: "Invalid email or password", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -117,6 +171,7 @@ class emailSignInViewController: UIViewController {
             present(alertController, animated: true, completion: nil)
         }
     }
+
     
     @objc func validateInput() {
         guard let email = emailTextField.text, let password = passwordTextField.text else {
@@ -145,4 +200,6 @@ class emailSignInViewController: UIViewController {
     @objc func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
+    
+
 }

@@ -1,4 +1,5 @@
 import UIKit
+import FirebaseFirestore
 
 class signup: UIViewController {
     
@@ -188,3 +189,4 @@ class signup: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
 }
+

@@ -1,7 +1,17 @@
 import UIKit
 import SnapKit
+import FirebaseFirestore
 
 class viewProfile: UIViewController {
+    
+    //MARK: - Variables
+    
+    let db = Firestore.firestore()
+    
+    var name:String = "Harsha Amarasinghe"
+    var age:String = "25"
+    var height:String = "178"
+    var weight:String = "60"
     
     //Mark:- Components
     
@@ -167,12 +177,9 @@ class viewProfile: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        getUserDataFirebase()
         setupUI()
-        labelName.text = "Harsha Amarasinghe"
-        labelAgeOne.text = "25"
-        labelWeightOne.text = "60"
-        labelHeightOne.text = "178"
+        
     }
     
     //Mark:- Functions
@@ -250,6 +257,9 @@ class viewProfile: UIViewController {
     
     @objc func editProfile(){
         let vc = viewEditProfile()
+        vc.textFieldAge.placeholder = self.age
+        vc.textFieldHeight.placeholder = self.height
+        vc.textFieldWeight.placeholder = self.weight
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -271,6 +281,48 @@ class viewProfile: UIViewController {
         let vc = screenOne()
         vc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func getUserDataFirebase() {
+        
+        let data = UserDefaults.standard
+        
+        let email = data.string(forKey: "emailData")
+        
+        let userRef = db.collection("users")
+        let query = userRef.whereField("email", isEqualTo: email as Any)
+
+        query.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+                return
+            }
+
+            guard let documents = querySnapshot?.documents else {
+                print("No documents found")
+                return
+            }
+
+            if let userDocument = documents.first {
+                // Email exists in the database
+                let name = userDocument.data()["email"] as? String ?? ""
+                let age = userDocument.data()["age"] as? String ?? ""
+                let height = userDocument.data()["height"] as? String ?? ""
+                let weight = userDocument.data()["weight"] as? String ?? ""
+                
+                self.name = name
+                self.age = age
+                self.height = height
+                self.weight = weight
+                
+                self.labelName.text = self.name
+                self.labelAgeOne.text = self.age
+                self.labelWeightOne.text = self.weight
+                self.labelHeightOne.text = self.height
+                //print("BMI Goal: \(self.userBMI)")
+                //self.chooseTheExerciseList()
+            }
+        }
     }
 }
 
