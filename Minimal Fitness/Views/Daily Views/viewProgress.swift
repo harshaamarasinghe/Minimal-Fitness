@@ -1,9 +1,16 @@
 import UIKit
 import SnapKit
+import FirebaseFirestore
 
 class viewProgress: UIViewController {
     
     // MARK:- Variables
+    let db = Firestore.firestore()
+    
+    var dataArray: [[String: Any]] = []
+    var weights: [String] = []
+    var doubleWeights: [Double] = []
+    
     
     private var chartView: ChartView!
     
@@ -23,7 +30,7 @@ class viewProgress: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 24, weight: .thin)
         label.numberOfLines = 0
-        label.text = "Your weight changes over the past 6 months"
+        label.text = "Your weight changes over the past months"
         label.textAlignment = .center
         return label
     }()
@@ -39,9 +46,15 @@ class viewProgress: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let data = UserDefaults.standard
+        let email = data.string(forKey: "email")!
+        
+        readUserWeightsFromFirebase(email: email)
         
         setupUI()
-        setupChartView()
+//        setupChartView()
+        
+        print("email :",email)
     }
     
     func setupUI() {
@@ -75,7 +88,7 @@ class viewProgress: UIViewController {
     func setupChartView() {
         chartView = ChartView(frame: CGRect(x: 10, y: 300, width: 400, height: 200))
         chartView.backgroundColor = .white
-        let data: [CGFloat] = [60, 63, 65, 68, 70, 68]
+        let data: [Double] = doubleWeights
         
         chartView.updateChart(with: data)
         view.addSubview(chartView)
@@ -88,11 +101,55 @@ class viewProgress: UIViewController {
         }
 
     }
+    
+    func readUserWeightsFromFirebase(email: String) {
+        db.collection("/userweights")
+            .whereField("email", isEqualTo: email) // Filter documents by email address
+            .getDocuments { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        let data = document.data()
+                        self.dataArray.append(data)
+                    }
+                }
+                self.saveweight()
+                self.convertStringWeightsToDouble()
+                self.printArrayData()
+                self.setupChartView()
+            }
+    }
+    
+    func saveweight(){
+        for data in dataArray {
+            self.weights.append(data["weight"] as! String)
+        }
+    }
+    func printArrayData() {
+        
+        print("weight data array:")
+        for data in doubleWeights {
+            
+            print(data)
+        }
+    }
+    
+    func convertStringWeightsToDouble() {
+       
+        for weightString in weights {
+            if let weightDouble = Double(weightString) {
+                doubleWeights.append(weightDouble)
+            }
+        }
+    
+    }
+
 }
 
 class ChartView: UIView {
     
-    private var dataEntries: [CGFloat] = []
+    private var dataEntries: [Double] = []
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
@@ -147,8 +204,10 @@ class ChartView: UIView {
         context.strokePath()
     }
     
-    func updateChart(with data: [CGFloat]) {
+    func updateChart(with data: [Double]) {
         dataEntries = data
         setNeedsDisplay()
     }
+    
 }
+

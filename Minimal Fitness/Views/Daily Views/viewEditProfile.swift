@@ -233,6 +233,19 @@ class viewEditProfile: UIViewController {
                 }
             }
         }
+        
+        let data: [String: Any] = [
+            "email": email,
+            "weight": weight
+        ]
+        
+        db.collection("/userweights").addDocument(data: data) { error in
+            if let error = error {
+                print("Error adding document: \(error)")
+            } else {
+                print("Document added")
+            }
+        }
     }
 
     func showAlert(message: String) {

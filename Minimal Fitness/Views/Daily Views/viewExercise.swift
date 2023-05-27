@@ -9,6 +9,9 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     
     var videoId: String = ""
     
+    var reps:Int = 0
+    var sets:Int = 0
+    var weight:String = ""
     
     
     //Mark: - Components
@@ -324,6 +327,10 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     func stopTimer() {
         timer?.invalidate()
         timer = nil
+        
+        
+        
+        
     }
     
     func formatElapsedTime(_ elapsedTime: TimeInterval) -> String {
@@ -333,6 +340,12 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     }
     
     func finishStopwatch(_ alertController: UIAlertController) {
+        
+        //Save "Post Workout" Data
+        
+        
+        
+        
         alertController.dismiss(animated: true, completion: nil)
         navigationController?.popViewController(animated: true)
         
@@ -340,5 +353,20 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         elapsedTime = 0.0
     }
     
+    func savePostWorkoutData(workout:String, reps:Int, sets:Int, weight:String, time:String){
+        
+    }
     
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == repetitionsPicker {
+            let selectedReps = repetitionsData[row]
+            reps = selectedReps
+        } else if pickerView == setsPicker {
+            let selectedSets = setData[row]
+            sets = selectedSets
+        } else if pickerView == weightPicker {
+            let selectedWeight = weightData[row]
+            weight = selectedWeight
+        }
+    }
 }

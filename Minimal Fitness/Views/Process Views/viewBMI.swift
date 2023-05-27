@@ -338,6 +338,20 @@ class viewBMI: UIViewController {
                 print("Document added")
             }
         }
+        
+        let dataUserWeights: [String: Any] = [
+            "email": email,
+            "weight": weight
+        ]
+        
+        db.collection("/userweights").addDocument(data: dataUserWeights) { error in
+            if let error = error {
+                print("Error adding document: \(error)")
+            } else {
+                print("Document added")
+            }
+        }
+        
     }
     
 }
