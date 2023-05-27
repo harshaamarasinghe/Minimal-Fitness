@@ -253,6 +253,7 @@ class viewProfile: UIViewController {
             make.size.equalTo(CGSize(width: 180, height: 50))
         }
         
+        
     }
     
     @objc func editProfile(){
@@ -291,7 +292,7 @@ class viewProfile: UIViewController {
         
         let data = UserDefaults.standard
         
-        let email = data.string(forKey: "emailData")
+        let email = data.string(forKey: "email")
         
         let userRef = db.collection("users")
         let query = userRef.whereField("email", isEqualTo: email as Any)
@@ -324,7 +325,10 @@ class viewProfile: UIViewController {
                 self.labelHeightOne.text = self.height
             }
         }
-    } 
+    }
+    
+    
+
 }
 
 

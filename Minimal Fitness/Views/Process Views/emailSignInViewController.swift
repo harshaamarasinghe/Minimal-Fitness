@@ -139,7 +139,7 @@ class emailSignInViewController: UIViewController {
                     
                     // Email and password are correct
                     
-                    data.set(email, forKey: "emailData")
+                    data.set(email, forKey: "email")
                     
                     let nextViewController = TabBarController()
                     self.navigationController?.pushViewController(nextViewController, animated: true)

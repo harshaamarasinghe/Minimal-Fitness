@@ -10,6 +10,7 @@ class emailSignupViewController: UIViewController {
     var dataArray: [[String: Any]] = []
     var emailDataArray: [String] = []
     var password: String = ""
+    var emailAddr: String = ""
     
     //MARK: UI Components
     
@@ -153,9 +154,10 @@ class emailSignupViewController: UIViewController {
             return
         }
         
-        self.controlSignUp(emailData: emailTextField.text!)
-        
         self.password = passwordTextField.text!
+        self.emailAddr = emailTextField.text ?? "mini@m.com"
+        
+        compareEmailData(emailData: emailAddr)
         
         // Reset text fields
         emailTextField.text = ""
@@ -187,11 +189,6 @@ class emailSignupViewController: UIViewController {
     
     @objc func backButtonTapped() {
         navigationController?.popViewController(animated: true)
-    }
-    
-    func controlSignUp(emailData:String){
-        let email = emailData
-        compareEmailData(emailData: email)
     }
     
     func getEmailData(){
@@ -234,16 +231,16 @@ class emailSignupViewController: UIViewController {
         if !isMatchFound {
             let alertController = UIAlertController(title: "Successfully Registered!", message: nil, preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
-                        self?.setUserData(email: emailData)
+                        self?.setUserData()
                     }
             alertController.addAction(okAction)
             present(alertController, animated: true, completion: nil)
         }
     }
     
-    func setUserData(email:String){
+    func setUserData(){
         let userData = UserDefaults.standard
-        userData.set(email, forKey: "email")
+        userData.set(emailAddr, forKey: "email")
         userData.set(password, forKey: "password")
         genderVC()
     }
