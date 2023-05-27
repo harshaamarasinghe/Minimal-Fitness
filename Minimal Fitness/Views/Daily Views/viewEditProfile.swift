@@ -4,12 +4,12 @@ import FirebaseFirestore
 
 class viewEditProfile: UIViewController {
 
-    //MARK: - Variables
+    //MARK: Variables
     
     let db = Firestore.firestore()
     
     var dataUpdatedCompletion: (() -> Void)?
-    //Mark:- Components
+    //MARK: Components
     
     let labelTitle : UILabel = {
         let label = UILabel()
@@ -61,7 +61,6 @@ class viewEditProfile: UIViewController {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
-        //textField.placeholder = "25 yrs"
         textField.keyboardType = .numberPad
         textField.font = .systemFont(ofSize: 26)
         return textField
@@ -71,7 +70,6 @@ class viewEditProfile: UIViewController {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
-        //textField.placeholder = "60 kg"
         textField.keyboardType = .numberPad
         textField.font = .systemFont(ofSize: 26)
         return textField
@@ -82,7 +80,6 @@ class viewEditProfile: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
         textField.font = .systemFont(ofSize: 26)
-        //textField.placeholder = "178 cm"
         textField.keyboardType = .numberPad
         return textField
     }()
@@ -100,11 +97,10 @@ class viewEditProfile: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.tintColor = .orange
-        //view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToDismiss)))
         setupUI()
     }
     
-        //Mark:- Functions
+    //MARK: Funcitons
     
     func setupUI(){
         view.backgroundColor = .white
@@ -122,7 +118,7 @@ class viewEditProfile: UIViewController {
         
         buttonUpdate.addTarget(self, action: #selector(updateProcess), for: .touchUpInside)
         
-        //Mark:- Constraints
+        //MARK: Constraints
         
         labelTitle.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -180,6 +176,7 @@ class viewEditProfile: UIViewController {
         
     }
 
+    //viewProfile is updated after the editing data
     @objc func updateProcess() {
         let data = UserDefaults.standard
         let email = data.string(forKey: "email")
@@ -203,6 +200,7 @@ class viewEditProfile: UIViewController {
         }
     }
 
+    //Update data in the databse
     func updateData(email: String, age: String, height: String, weight: String, completion: @escaping (Bool) -> Void) {
         let docRef = db.collection("users").whereField("email", isEqualTo: email)
         
@@ -234,6 +232,7 @@ class viewEditProfile: UIViewController {
             }
         }
         
+        //Adding weight data into a seperate collection
         let data: [String: Any] = [
             "email": email,
             "weight": weight

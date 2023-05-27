@@ -52,7 +52,6 @@ class viewBMI: UIViewController {
         label.font = .systemFont(ofSize: 36, weight: .thin)
         label.text = "Are"
         label.textAlignment = .center
-        //label.layer.borderColor =
         return label
     }()
     
@@ -127,14 +126,12 @@ class viewBMI: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupUI();
-        
     }
     
     func setupUI(){
         view.backgroundColor = .white
         
         self.navigationItem.setHidesBackButton(true, animated: true)
-        //self.navigationController?.setNavigationBarHidden(true, animated: true)
         
         calculateBMI()
         
@@ -163,7 +160,7 @@ class viewBMI: UIViewController {
         buttonStart.addTarget(self, action: #selector(getNext), for: .touchUpInside)
         
         
-        //Constraints
+        //MARK: Constraints
         
         labelOne.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -207,12 +204,9 @@ class viewBMI: UIViewController {
         
         buttonStart.snp.makeConstraints { make in
             make.top.equalTo(hStack.snp.bottom).offset(50)
-            //make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
             make.centerX.equalTo(view)
             make.size.equalTo(CGSize(width: 227, height: 50))
         }
-        
-        
     }
     
     func calculateBMI(){
@@ -226,8 +220,6 @@ class viewBMI: UIViewController {
         let bmiDouble = Double(bmi)
         
         print(weight, height, bmi, bmiDouble)
-        
-        
         
         if(bmiDouble<18.5){
             labelFive.text = "Underweight"
@@ -351,7 +343,5 @@ class viewBMI: UIViewController {
                 print("Document added")
             }
         }
-        
     }
-    
 }

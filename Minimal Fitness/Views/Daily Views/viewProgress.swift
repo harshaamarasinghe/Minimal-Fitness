@@ -4,7 +4,7 @@ import FirebaseFirestore
 
 class viewProgress: UIViewController {
     
-    // MARK:- Variables
+    // MARK: Variables
     let db = Firestore.firestore()
     
     var dataArray: [[String: Any]] = []
@@ -14,7 +14,7 @@ class viewProgress: UIViewController {
     
     private var chartView: ChartView!
     
-    // MARK:- Components
+    // MARK: Components
     
     let labelTitleOne: UILabel = {
         let label = UILabel()
@@ -42,7 +42,7 @@ class viewProgress: UIViewController {
         return imageView
     }()
     
-    // MARK:- Lifecycle
+    //MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,9 +52,6 @@ class viewProgress: UIViewController {
         readUserWeightsFromFirebase(email: email)
         
         setupUI()
-//        setupChartView()
-        
-        print("email :",email)
     }
     
     func setupUI() {
@@ -83,8 +80,9 @@ class viewProgress: UIViewController {
         }
     }
     
-    // MARK:- Functions
+    // MARK: Functions
     
+    //Bar chart class is called here with the weight data
     func setupChartView() {
         chartView = ChartView(frame: CGRect(x: 10, y: 300, width: 400, height: 200))
         chartView.backgroundColor = .white
@@ -99,9 +97,9 @@ class viewProgress: UIViewController {
             make.width.equalTo(400)
             make.height.equalTo(200)
         }
-
     }
     
+    //Getting the weight changes of users
     func readUserWeightsFromFirebase(email: String) {
         db.collection("/userweights")
             .whereField("email", isEqualTo: email) // Filter documents by email address
@@ -147,6 +145,7 @@ class viewProgress: UIViewController {
 
 }
 
+//MARK: Bar Chart Class
 class ChartView: UIView {
     
     private var dataEntries: [Double] = []
@@ -208,6 +207,5 @@ class ChartView: UIView {
         dataEntries = data
         setNeedsDisplay()
     }
-    
 }
 

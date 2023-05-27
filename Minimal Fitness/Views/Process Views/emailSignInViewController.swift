@@ -65,6 +65,8 @@ class emailSignInViewController: UIViewController {
         setupNavigationBar()
     }
     
+    //MARK: Functions
+    
     func setupUI() {
         view.addSubview(titleLabel)
         view.addSubview(imageSI)
@@ -106,23 +108,6 @@ class emailSignInViewController: UIViewController {
         passwordTextField.addTarget(self, action: #selector(validateInput), for: .editingChanged)
     }
     
-//    @objc func signInButtonTapped() {
-//        guard let email = emailTextField.text, let password = passwordTextField.text else {
-//
-//            return
-//        }
-//
-//        if isValidEmail(email) && isValidPassword(password) {
-//            let nextViewController = TabBarController()
-//            navigationController?.pushViewController(nextViewController, animated: true)
-//        } else {
-//            let alertController = UIAlertController(title: "Error", message: "Invalid email or password", preferredStyle: .alert)
-//            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-//            alertController.addAction(okAction)
-//            present(alertController, animated: true, completion: nil)
-//        }
-//    }
-    
     @objc func signInButtonTapped() {
         
         let data = UserDefaults.standard
@@ -132,6 +117,7 @@ class emailSignInViewController: UIViewController {
         }
         
         if isValidEmail(email) && isValidPassword(password) {
+            
             // Validate email and password
             let userRef = db.collection("users")
             let query = userRef.whereField("email", isEqualTo: email)
@@ -150,6 +136,7 @@ class emailSignInViewController: UIViewController {
                 if let userDocument = documents.first,
                    let storedPassword = userDocument.data()["password"] as? String,
                    storedPassword == password {
+                    
                     // Email and password are correct
                     
                     data.set(email, forKey: "emailData")
@@ -200,6 +187,4 @@ class emailSignInViewController: UIViewController {
     @objc func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
-    
-
 }

@@ -2,13 +2,13 @@ import UIKit
 
 class viewHeight: UIViewController {
 
-    //Var
+    //MARK: Variables
     
     var heightNumber : String = ""
     var type : String     = ""
     var finalHeight : String  = ""
     
-    //UI Comps
+    //MARK: UI Components
     
     let progressView : UIProgressView = {
         let progressView = UIProgressView(progressViewStyle: .bar)
@@ -97,17 +97,6 @@ class viewHeight: UIViewController {
         return button
     }()
     
-//    let buttonLbs : UIButton = {
-//        let button = UIButton()
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.setTitle("ft", for: .normal)
-//        button.titleLabel?.font = .systemFont(ofSize: 28, weight: .bold)
-//        button.backgroundColor = UIColor(red: 204/255, green: 190/255, blue: 248/255, alpha: 1.0)
-//        button.titleLabel?.textColor = .white
-//        button.layer.cornerRadius = 10
-//        return button
-//    }()
-    
     let hStack : UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -130,12 +119,13 @@ class viewHeight: UIViewController {
         super.viewDidLoad()
 
         self.navigationItem.setHidesBackButton(true, animated: true)
-        //self.navigationController?.setNavigationBarHidden(true, animated: true)
         
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToDismiss)))
         setupNavigationBar()
         setupUI()
     }
+    
+    //MARK: Functions
     
     func setupUI(){
         view.backgroundColor = .white
@@ -152,7 +142,6 @@ class viewHeight: UIViewController {
         view.addSubview(textField)
         
         hStack.addArrangedSubview(buttonCm)
-   //     hStack.addArrangedSubview(buttonLbs)
         
         view.addSubview(hStack)
         view.addSubview(buttonCont)
@@ -162,10 +151,9 @@ class viewHeight: UIViewController {
         //Button actions
         
         buttonCm.addTarget(self, action: #selector(btnCm), for: .touchUpInside)
-      //  buttonLbs.addTarget(self, action: #selector(btnLbs), for: .touchUpInside)
         buttonCont.addTarget(self, action: #selector(getNext), for: .touchUpInside)
         
-        //Constraints
+        //MARK: Constraints
 
         NSLayoutConstraint.activate([
             labelOne.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -216,9 +204,7 @@ class viewHeight: UIViewController {
     }
     
     @objc func btnCm(){
-        buttonCm.backgroundColor = UIColor(red: 182/255, green: 162/255, blue: 245/255, alpha: 1.0)
-        //buttonLbs.backgroundColor = UIColor(red: 204/255, green: 190/255, blue: 248/255, alpha: 1.0)
-        
+        buttonCm.backgroundColor = UIColor(red: 182/255, green: 162/255, blue: 245/255, alpha: 1.0)        
         type = "cm"
     }
     

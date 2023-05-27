@@ -5,7 +5,7 @@ import FirebaseFirestore
 
 class viewHome: UIViewController {
     
-    //Mark:- Variables
+    //MARK: Variables
     
     let db = Firestore.firestore() //Firebase Decl
     
@@ -20,8 +20,9 @@ class viewHome: UIViewController {
     var dayOfWeek: String = "Monday"
     var userBMI: String = "gain-weight"
     
+    var email:String = ""
     
-    //Mark:- Components
+    //MARK: Components
     
     let labelTitleOne : UILabel = {
         let label = UILabel()
@@ -70,7 +71,7 @@ class viewHome: UIViewController {
         return table
     }()
     
-    //Mark:- Lifecycle
+    //MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,7 +92,7 @@ class viewHome: UIViewController {
         setupUI()
     }
     
-    //Mark:- Funcs
+    //MARK: Funcs
     
     func setupUI(){
         view.backgroundColor = .white
@@ -101,7 +102,7 @@ class viewHome: UIViewController {
         view.addSubview(imageProfile)
         view.addSubview(exerciseTable)
         
-        //Constraints
+        //MARK: Constraints
         
         labelTitleOne.snp.makeConstraints { make in
             make.top.equalTo(view.snp.top).offset(70)
@@ -133,7 +134,7 @@ class viewHome: UIViewController {
         }
     }
     
-    //Mark:- getting the correct list of exercises
+    //MARK: Get the correct exercise
     func chooseTheExerciseList(){
         
         let dc = "/exercises/"
@@ -152,7 +153,6 @@ class viewHome: UIViewController {
             let day = "/day-three"
             let pathStr = dc + self.userBMI + day
             readDocument(pathStr: pathStr)
-            //print(pathStr)
         }
         else if(self.dayOfWeek == "Thursday"){
             let day = "/day-four"
@@ -188,7 +188,6 @@ class viewHome: UIViewController {
                     self.dataArray.append(data)
                 }
                 
-                //Function calls to save data in seperate arrays
                 self.saveNameArray()
                 self.saveDescArray()
                 self.savePicArray()
@@ -232,30 +231,10 @@ class viewHome: UIViewController {
         }
     }
     
-//    func getUserDataFromFirebase(){
-//        db.collection("/users").getDocuments() { (querySnapshot, err) in
-//            if let err = err {
-//                print("Error getting documents: \(err)")
-//            } else {
-//                for document in querySnapshot!.documents {
-//                    let data = document.data()
-//                    self.dataArray.append(data)
-//                }
-//
-//                //Function calls to save data in seperate arrays
-//                self.saveNameArray()
-//                self.saveDescArray()
-//                self.savePicArray()
-//                self.saveVideoArray()
-//
-//                //Refresh the tableView
-//                self.exerciseTable.reloadData()
-//            }
-//        }
-//    }
-    
     @objc func getNext(name:String,desc:String,video:String) {
         let vc = viewExercise()
+        vc.workoutName = name
+        vc.email = self.email
         vc.labelWorkout.text = name
         vc.labelDesc.text = desc
         vc.videoId = video
@@ -263,11 +242,12 @@ class viewHome: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    //MARK: Get user data from Firebase Database
     func getUserDataFirebase() {
         
         let data = UserDefaults.standard
         
-        let email = data.string(forKey: "emailData")
+        email = data.string(forKey: "emailData")!
         
         let userRef = db.collection("users")
         let query = userRef.whereField("email", isEqualTo: email as Any)
@@ -284,15 +264,11 @@ class viewHome: UIViewController {
             }
 
             if let userDocument = documents.first {
-                // Email exists in the database
                 let bmi = userDocument.data()["bmi"] as? String ?? ""
-                
-                
                 self.userBMI = bmi
                 print("BMI Goal: \(self.userBMI)")
                 self.chooseTheExerciseList()
             } else {
-                
                 print("BMI Goal: No BMI")
             }
         }
@@ -321,8 +297,6 @@ extension viewHome : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        //let row = [indexPath.row]
-        
         let nameD = nameDataArray[indexPath.row]
         let descD = descDataArray[indexPath.row]
         let videoD = videoDataArray[indexPath.row]
@@ -331,10 +305,6 @@ extension viewHome : UITableViewDelegate, UITableViewDataSource{
         
         getNext(name: nameD, desc: descD, video: videoD)
     }
-    
-    
-    
-    
 }
 
 

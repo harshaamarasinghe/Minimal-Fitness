@@ -2,7 +2,7 @@ import UIKit
 
 class signIn: UIViewController {
 
-    //Mark:- UI Comps
+    //MARK: UI Components
     
     let labelOne : UILabel = {
         let label = UILabel()
@@ -107,7 +107,7 @@ class signIn: UIViewController {
         
     }
 
-    //Mark:- Funcs
+    //MARK: Functions
     
     func setupUI(){
         view.backgroundColor = .white
@@ -125,16 +125,14 @@ class signIn: UIViewController {
         
         view.addSubview(hStack)
         
-        //Mark:- button actions
+        //Button actions
         
         buttonSU.addTarget(self, action: #selector(getSignUp), for: .touchUpInside)
-        buttonGoogle.addTarget(self, action: #selector(getSignIn), for: .touchUpInside)
-        buttonApple.addTarget(self, action: #selector(getSignIn), for: .touchUpInside)
+//        buttonGoogle.addTarget(self, action: #selector(getSignIn), for: .touchUpInside)
+//        buttonApple.addTarget(self, action: #selector(getSignIn), for: .touchUpInside)
         buttonEmail.addTarget(self, action: #selector(getSignInWithEmail), for: .touchUpInside)
 
-        
-        
-        //Mark:- constraints
+        //MARK: Constraints
         NSLayoutConstraint.activate([
             labelOne.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             labelOne.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
@@ -144,7 +142,6 @@ class signIn: UIViewController {
             labelTwo.topAnchor.constraint(equalTo: labelOne.bottomAnchor),
             labelTwo.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             labelTwo.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            //labelTwo.heightAnchor.constraint(equalToConstant: 40),
             
             imageSI.topAnchor.constraint(equalTo: labelTwo.bottomAnchor),
             imageSI.heightAnchor.constraint(equalToConstant: 381),
@@ -177,7 +174,7 @@ class signIn: UIViewController {
             hStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
-    //Mark:- Functions
+    //MARK: Functions
     
     @objc func getSignIn(){
         let vc = TabBarController()

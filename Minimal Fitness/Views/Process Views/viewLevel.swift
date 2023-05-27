@@ -2,11 +2,11 @@ import UIKit
 
 class viewLevel: UIViewController {
 
-    //Var
+    //MARK: Variables
     
     var level : String = ""
     
-    //UI Comps
+    //MARK: UI Components
     
     let progressView : UIProgressView = {
         let progressView = UIProgressView(progressViewStyle: .bar)
@@ -136,7 +136,6 @@ class viewLevel: UIViewController {
         super.viewDidLoad()
 
         self.navigationItem.setHidesBackButton(true, animated: true)
-        //self.navigationController?.setNavigationBarHidden(true, animated: true)
         setupNavigationBar()
         setupUI()
     }
@@ -168,7 +167,7 @@ class viewLevel: UIViewController {
         buttonAdv.addTarget(self, action: #selector(btnA), for: .touchUpInside)
         buttonCont.addTarget(self, action: #selector(getNext), for: .touchUpInside)
         
-        //Constraints
+        //MARK: Constraints
 
         NSLayoutConstraint.activate([
             labelOne.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -204,8 +203,6 @@ class viewLevel: UIViewController {
             labelSix.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             labelSix.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -180),
             labelSix.heightAnchor.constraint(equalToConstant: 40),
-            
-            
             
             vStack.topAnchor.constraint(equalTo: image.bottomAnchor, constant: -20),
             vStack.leadingAnchor.constraint(equalTo: labelFive.trailingAnchor, constant: -20),
@@ -266,8 +263,6 @@ class viewLevel: UIViewController {
         level = "Advanced"
     }
     
-    //button action
-    
     @objc func getNext(){
         
         let data = UserDefaults.standard
@@ -279,12 +274,9 @@ class viewLevel: UIViewController {
             present(alert, animated: true, completion: nil)
         }
         else{
-            
             data.set(level, forKey: "Level")
-            
             let vc = viewGoal()
             navigationController?.pushViewController(vc, animated: true)
-            
         }
     }
     

@@ -5,9 +5,9 @@ import SnapKit
 
 class viewSchedule: UIViewController {
     
-    //Mark:- Variables
+    //MARK: Variables
     
-    let db = Firestore.firestore() // Firebase
+    let db = Firestore.firestore() // Firebase Instance
     
     var dataArray: [[String: Any]] = []
     var nameDataArray: [String] = []
@@ -35,7 +35,7 @@ class viewSchedule: UIViewController {
         "Sunday"
     ]
     
-    //Mark:- Comps
+    //MARK: Components
     
     let labelTitleOne : UILabel = {
         let label = UILabel()
@@ -65,7 +65,7 @@ class viewSchedule: UIViewController {
         tableView.dataSource = self
     }
     
-    //Mark:- Funcs
+    //MARK: Functions
     
     func setupUI() {
         view.backgroundColor = .white

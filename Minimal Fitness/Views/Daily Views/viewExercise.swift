@@ -1,20 +1,24 @@
 import UIKit
 import WebKit
+import FirebaseFirestore
 
 class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-    //Mark: - Variables
+    
+    //MARK: Variables
+    
+    let db = Firestore.firestore()
     
     var timer: Timer?
     var elapsedTime: TimeInterval = 0.0
     
     var videoId: String = ""
-    
+    var email: String = ""
+    var workoutName = ""
     var reps:Int = 0
     var sets:Int = 0
     var weight:String = ""
     
-    
-    //Mark: - Components
+    //MARK: Components
     
     let webView: WKWebView = {
         let webView = WKWebView()
@@ -45,7 +49,7 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         return label
     }()
     
-    //MARK: - Get the weights
+    //MARK: Get the weights
     
     let labelWeight : UILabel = {
         let label = UILabel()
@@ -65,7 +69,6 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     
     let weightData = stride(from: 0.0, to: 200.5, by: 0.5).map { String(format: "%.1f kg", $0) }
     
-    
     let hStackWeight : UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -74,7 +77,7 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         return stack
     }()
     
-    //MARK: - Get the reps
+    //MARK: Get the reps
     
     let labelReps : UILabel = {
         let label = UILabel()
@@ -102,7 +105,7 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         return stack
     }()
     
-    //MARK: - Get the sets
+    //MARK: Get the sets
     
     let labelSets : UILabel = {
         let label = UILabel()
@@ -151,15 +154,13 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         setsPicker.delegate = self
         setsPicker.dataSource = self
         
-        //weight
-        
         weightPicker.delegate = self
         weightPicker.dataSource = self
         
         setupUI()
     }
     
-    //Mark:- Youtube Video Player
+    //MARK: Youtube Video Player
     
     func youtubeVideoView(){
         let embedHTML = "<html><body><iframe width=\"980\" height=\"500\" src=\"https://www.youtube.com/embed/\(videoId)?playsinline=1\" frameborder=\"0\" allowfullscreen></iframe></body></html>"
@@ -173,7 +174,6 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         appearance.buttonAppearance.normal.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.orange]
         navigationItem.standardAppearance = appearance
         navigationController?.navigationBar.tintColor = UIColor.orange
-        
         
         youtubeVideoView()
         
@@ -189,7 +189,6 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         hStackSets.addArrangedSubview(labelSets)
         hStackSets.addArrangedSubview(setsPicker)
         
-        
         view.addSubview(hStackSets)
         
         hStackWeight.addArrangedSubview(labelWeight)
@@ -198,11 +197,10 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         view.addSubview(hStackWeight)
         view.addSubview(startButton)
         
-        //Mak: - Button Action
-        startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside) // Add target action
+        //MARK: - Button Action
+        startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
         
-        
-        //Mark: - Constraints
+        //MARK: - Constraints
         
         labelWorkout.snp.makeConstraints { make in
             make.top.equalTo(webView.snp.bottom).offset(10)
@@ -243,7 +241,6 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         }
         
         setsPicker.snp.makeConstraints { make in
-            
             make.width.equalTo(200)
             make.height.equalTo(100)
         }
@@ -255,7 +252,6 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         }
         
         weightPicker.snp.makeConstraints { make in
-            
             make.width.equalTo(200)
             make.height.equalTo(100)
         }
@@ -263,7 +259,6 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         startButton.snp.makeConstraints { make in
             make.top.equalTo(hStackWeight.snp.bottom).offset(15)
             make.centerX.equalTo(view)
-            
         }
         
     }
@@ -303,7 +298,7 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         return label
     }
     
-    //Mark:- Functions for startButton
+    //MARK: - Functions
     
     @objc func startButtonTapped() {
         let alertController = UIAlertController(title: "Workout Stopwatch", message: nil, preferredStyle: .alert)
@@ -314,6 +309,8 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         present(alertController, animated: true, completion: nil)
         startTimer()
     }
+    
+    //MARK: - Timer Functions
     
     func startTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (_) in
@@ -327,10 +324,6 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
     func stopTimer() {
         timer?.invalidate()
         timer = nil
-        
-        
-        
-        
     }
     
     func formatElapsedTime(_ elapsedTime: TimeInterval) -> String {
@@ -343,8 +336,7 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         
         //Save "Post Workout" Data
         
-        
-        
+        savePostWorkoutData(email: email, workout: workoutName, reps: reps, sets: sets, weight: weight, time: formatElapsedTime(elapsedTime))
         
         alertController.dismiss(animated: true, completion: nil)
         navigationController?.popViewController(animated: true)
@@ -353,8 +345,23 @@ class viewExercise: UIViewController, UIPickerViewDelegate, UIPickerViewDataSour
         elapsedTime = 0.0
     }
     
-    func savePostWorkoutData(workout:String, reps:Int, sets:Int, weight:String, time:String){
+    func savePostWorkoutData(email:String, workout:String, reps:Int, sets:Int, weight:String, time:String){
+        let data: [String: Any] = [
+            "email": email,
+            "workout": workout,
+            "reps": reps,
+            "sets": sets,
+            "weight": weight,
+            "time": time
+        ]
         
+        db.collection("/userworkouts").addDocument(data: data) { error in
+            if let error = error {
+                print("Error adding document: \(error)")
+            } else {
+                print("Document added")
+            }
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {

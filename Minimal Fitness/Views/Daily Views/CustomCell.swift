@@ -4,6 +4,8 @@ import SnapKit
 class CustomCell: UITableViewCell {
 
     static let identifier = "CustomCell"
+
+    //MARK: Components
     
     private let myImageView : UIImageView = {
        let image = UIImageView()
@@ -55,7 +57,7 @@ class CustomCell: UITableViewCell {
         self.contentView.addSubview(myLabel)
         self.contentView.addSubview(myImageViewTwo)
         
-        //Constraints
+        //MARK: Constraints
         
         myImageView.snp.makeConstraints { make in
             make.top.equalTo(self.contentView.layoutMarginsGuide.snp.top)

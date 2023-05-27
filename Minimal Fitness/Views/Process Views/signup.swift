@@ -3,7 +3,7 @@ import FirebaseFirestore
 
 class signup: UIViewController {
     
-    // MARK: - UI Components
+    // MARK: UI Components
     
     let labelOne: UILabel = {
         let label = UILabel()
@@ -100,7 +100,7 @@ class signup: UIViewController {
         return stack
     }()
     
-    // MARK: - Lifecycle Methods
+    // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,7 +108,7 @@ class signup: UIViewController {
         setupUI()
     }
     
-    // MARK: - UI Setup
+    // MARK: Functions
     
     func setupUI() {
         view.backgroundColor = .white
@@ -127,9 +127,11 @@ class signup: UIViewController {
         
         // Button Actions
         buttonSI.addTarget(self, action: #selector(getSignIn), for: .touchUpInside)
-        buttonGoogle.addTarget(self, action: #selector(getGender), for: .touchUpInside)
-        buttonApple.addTarget(self, action: #selector(getGender), for: .touchUpInside)
+//        buttonGoogle.addTarget(self, action: #selector(getGender), for: .touchUpInside)
+//        buttonApple.addTarget(self, action: #selector(getGender), for: .touchUpInside)
         buttonEmail.addTarget(self, action: #selector(signUpWithEmail), for: .touchUpInside)
+        
+        //MARK: Constraints
         
         NSLayoutConstraint.activate([
             labelOne.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -171,8 +173,6 @@ class signup: UIViewController {
             hStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
-    
-    // MARK: - Button Actions
     
     @objc func getGender() {
         let vc = viewGender()

@@ -3,7 +3,7 @@ import FirebaseFirestore
 
 class emailSignupViewController: UIViewController {
     
-    // MARK: - Variable
+    //MARK: Variable
     
     let db = Firestore.firestore()
     
@@ -11,7 +11,7 @@ class emailSignupViewController: UIViewController {
     var emailDataArray: [String] = []
     var password: String = ""
     
-    // MARK: - UI Components
+    //MARK: UI Components
     
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -70,7 +70,7 @@ class emailSignupViewController: UIViewController {
         return button
     }()
     
-    // MARK: - Lifecycle Methods
+    //MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,7 +80,7 @@ class emailSignupViewController: UIViewController {
         setupNavigationBar()
     }
     
-    // MARK: - UI Setup
+    //MARK: Functions
     
     func setupUI() {
         view.backgroundColor = .white
@@ -124,8 +124,6 @@ class emailSignupViewController: UIViewController {
         ])
     }
     
-    // MARK: - Button Actions
-    
     func setupActions() {
         signupButton.addTarget(self, action: #selector(signUp), for: .touchUpInside)
     }
@@ -145,19 +143,15 @@ class emailSignupViewController: UIViewController {
         
         // Validate password
         guard isValidPassword(password) else {
-            // Handle error - Invalid password format
             displayAlert(message: "Please enter a password with at least 6 characters.")
             return
         }
         
         // Check if passwords match
         guard password == confirmPassword else {
-            // Handle error - Passwords do not match
             displayAlert(message: "Passwords do not match.")
             return
         }
-        
-        // Perform signup logic here
         
         self.controlSignUp(emailData: emailTextField.text!)
         
@@ -167,10 +161,6 @@ class emailSignupViewController: UIViewController {
         emailTextField.text = ""
         passwordTextField.text = ""
         confirmPasswordTextField.text = ""
-        
-    
-        
-       
     }
     
     func isValidEmail(_ email: String) -> Bool {
@@ -200,15 +190,11 @@ class emailSignupViewController: UIViewController {
     }
     
     func controlSignUp(emailData:String){
-        
         let email = emailData
         compareEmailData(emailData: email)
-        
     }
     
     func getEmailData(){
-        
-        
         db.collection("/users").getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
@@ -247,32 +233,22 @@ class emailSignupViewController: UIViewController {
         
         if !isMatchFound {
             let alertController = UIAlertController(title: "Successfully Registered!", message: nil, preferredStyle: .alert)
-            //let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
                         self?.setUserData(email: emailData)
                     }
             alertController.addAction(okAction)
             present(alertController, animated: true, completion: nil)
-            
-           
         }
     }
     
     func setUserData(email:String){
-        
-        print("Called")
-        
         let userData = UserDefaults.standard
-        
         userData.set(email, forKey: "email")
         userData.set(password, forKey: "password")
-        
         genderVC()
     }
     
     func genderVC(){
-        
-        print("Called")
         let vc = viewGender()
         navigationController?.pushViewController(vc, animated: true)
     }

@@ -1,10 +1,3 @@
-//
-//  TabBarController.swift
-//  Minimal Fitness
-//
-//  Created by Harsha Amarasinghe on 2023-05-15.
-//
-
 import UIKit
 
 class TabBarController: UITabBarController {

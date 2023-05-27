@@ -2,13 +2,13 @@ import UIKit
 
 class viewWeight: UIViewController {
 
-    //Var
+    //MARK: Variables
     
     var weightNumber : String = ""
     var type : String     = ""
     var finalWeight : String  = ""
     
-    //UI Comps
+    //MARK: UI Components
     
     let progressView : UIProgressView = {
         let progressView = UIProgressView(progressViewStyle: .bar)
@@ -119,12 +119,13 @@ class viewWeight: UIViewController {
         super.viewDidLoad()
 
         self.navigationItem.setHidesBackButton(true, animated: true)
-        //self.navigationController?.setNavigationBarHidden(true, animated: true)
         
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapToDismiss)))
         setupNavigationBar()
         setupUI()
     }
+    
+    //MARK: Functions
     
     func setupUI(){
         view.backgroundColor = .white
@@ -141,7 +142,6 @@ class viewWeight: UIViewController {
         view.addSubview(textField)
         
         hStack.addArrangedSubview(buttonKg)
-       // hStack.addArrangedSubview(buttonLbs)
         
         view.addSubview(hStack)
         view.addSubview(buttonCont)
@@ -153,7 +153,7 @@ class viewWeight: UIViewController {
         buttonKg.addTarget(self, action: #selector(btnKg), for: .touchUpInside)
         buttonCont.addTarget(self, action: #selector(getNext), for: .touchUpInside)
         
-        //Constraints
+        //MARK: Constraints
 
         NSLayoutConstraint.activate([
             labelOne.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -208,8 +208,6 @@ class viewWeight: UIViewController {
         
         type = "kg"
     }
-
-    //button action
     
     @objc func getNext(){
         
@@ -244,5 +242,4 @@ class viewWeight: UIViewController {
     @objc func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
-    
 }

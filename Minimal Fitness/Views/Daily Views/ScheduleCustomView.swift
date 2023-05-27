@@ -5,6 +5,8 @@ class ScheduleCustomCell: UITableViewCell {
 
     static let identifier = "ScheduleCustomCell"
     
+    //MARK: Components
+    
     private let myImageView : UIImageView = {
        let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -58,7 +60,7 @@ class ScheduleCustomCell: UITableViewCell {
         self.contentView.addSubview(myLabel)
         self.contentView.addSubview(myLabelMini)
         
-        //Constraints
+        //MARK: Constraints
         
         myImageView.snp.makeConstraints { make in
             make.top.equalTo(self.contentView.layoutMarginsGuide.snp.top)

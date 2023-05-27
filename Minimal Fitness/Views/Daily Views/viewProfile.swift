@@ -4,7 +4,7 @@ import FirebaseFirestore
 
 class viewProfile: UIViewController {
     
-    //MARK: - Variables
+    //MARK: Variables
     
     let db = Firestore.firestore()
     
@@ -13,7 +13,7 @@ class viewProfile: UIViewController {
     var height:String = "178"
     var weight:String = "60"
     
-    //Mark:- Components
+    //MARK: Components
     
     let labelProfile : UILabel = {
         let label = UILabel()
@@ -182,7 +182,7 @@ class viewProfile: UIViewController {
         
     }
     
-    //Mark:- Functions
+    //MARK: Functions
     
     func setupUI(){
         view.backgroundColor = .white
@@ -191,7 +191,7 @@ class viewProfile: UIViewController {
         view.addSubview(image)
         view.addSubview(labelName)
         
-        //Mark:- Button Functions
+        //Button Functions
         
         buttonLogout.addTarget(self, action: #selector(logOut), for: .touchUpInside)
         
@@ -219,7 +219,7 @@ class viewProfile: UIViewController {
         view.addSubview(vStackRowTwo)
         view.addSubview(buttonLogout)
         
-        //Mark:- Constraints
+        //MARK: Constraints
         
         labelProfile.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -286,6 +286,7 @@ class viewProfile: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    //User data from Firebasedatabase
     func getUserDataFirebase() {
         
         let data = UserDefaults.standard
@@ -307,7 +308,6 @@ class viewProfile: UIViewController {
             }
 
             if let userDocument = documents.first {
-                // Email exists in the database
                 let name = userDocument.data()["email"] as? String ?? ""
                 let age = userDocument.data()["age"] as? String ?? ""
                 let height = userDocument.data()["height"] as? String ?? ""
@@ -322,13 +322,9 @@ class viewProfile: UIViewController {
                 self.labelAgeOne.text = self.age
                 self.labelWeightOne.text = self.weight
                 self.labelHeightOne.text = self.height
-                //print("BMI Goal: \(self.userBMI)")
-                //self.chooseTheExerciseList()
             }
         }
-    }
-    
-    
+    } 
 }
 
 

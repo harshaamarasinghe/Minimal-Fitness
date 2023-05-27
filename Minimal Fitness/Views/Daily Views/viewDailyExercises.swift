@@ -6,6 +6,8 @@ import FirebaseFirestore
 
 class viewDailyExercises: UIViewController {
 
+    //MARK: Variables and Arrays
+    
     let exerciseImages : [UIImage] = [
         UIImage(named: "1")!,
         UIImage(named: "2")!,
@@ -32,7 +34,7 @@ class viewDailyExercises: UIViewController {
     var nameDataArray: [String] = []
     var descDataArray: [String] = []
     
-    //Mark:- Components
+    //MARK: Components
     
     let labelTitleOne : UILabel = {
         let label = UILabel()
@@ -69,7 +71,7 @@ class viewDailyExercises: UIViewController {
         tableView.dataSource = self
     }
     
-    //Mark:- Funcs
+    //MARK: Functions
     
     func setupUI() {
         view.backgroundColor = .white
@@ -145,6 +147,5 @@ extension viewDailyExercises: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
     }
 }

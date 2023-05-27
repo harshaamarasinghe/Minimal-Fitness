@@ -1,19 +1,12 @@
-//
-//  viewGoal.swift
-//  Minimal Fitness
-//
-//  Created by Harsha Amarasinghe on 2023-03-30.
-//
-
 import UIKit
 
 class viewGoal: UIViewController {
     
-    //Variables
+    //MARK: Variables
     
     var goal : String = ""
     
-    //UI Comps
+    //MARK: UI Comps
     
     let progressView : UIProgressView = {
         let progressView = UIProgressView(progressViewStyle: .bar)
@@ -131,7 +124,6 @@ class viewGoal: UIViewController {
         super.viewDidLoad()
         
         self.navigationItem.setHidesBackButton(true, animated: true)
-        //self.navigationController?.setNavigationBarHidden(true, animated: true)
         setupNavigationBar()
         setupUI()
     }
@@ -162,7 +154,7 @@ class viewGoal: UIViewController {
         buttonCont.addTarget(self, action: #selector(getNext), for: .touchUpInside)
         
         
-        //Constraints
+        //MARK: Constraints
         
         NSLayoutConstraint.activate([
             labelOne.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -253,8 +245,6 @@ class viewGoal: UIViewController {
             
             let vc = viewBMI()
             navigationController?.pushViewController(vc, animated: true)
-            
-            
         }
     }
     
@@ -268,5 +258,4 @@ class viewGoal: UIViewController {
     @objc func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
-    
 }

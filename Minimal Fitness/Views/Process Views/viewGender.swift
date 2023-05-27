@@ -2,11 +2,11 @@ import UIKit
 
 class viewGender: UIViewController {
     
-    //Mark:- Variables
+    //MARK: Variables
     
     var gender : String = ""
     
-    //Mark:- UI Comps
+    //MARK: UI Components
     
     let progressView : UIProgressView = {
         let progressView = UIProgressView(progressViewStyle: .bar)
@@ -115,7 +115,7 @@ class viewGender: UIViewController {
         setupUI()
     }
     
-    //Mark:- Functions
+    //MARK: Functions
     
     func setupUI(){
         view.backgroundColor = .white
@@ -133,13 +133,13 @@ class viewGender: UIViewController {
         
         progressView.frame = CGRect(x: (view.frame.size.width)/8, y: 100, width: view.frame.size.width-100, height: 20)
         
-        //Mark:- Button Actions
+        //Button Actions
         
         buttonMale.addTarget(self, action: #selector(propMale), for: .touchUpInside)
         buttonFemale.addTarget(self, action: #selector(propFemale), for: .touchUpInside)
         buttonCont.addTarget(self, action: #selector(getNext), for: .touchUpInside)
         
-        //Mark:- Constraints
+        //MARK: Constraints
         
         NSLayoutConstraint.activate([
             labelOne.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -195,8 +195,6 @@ class viewGender: UIViewController {
         ])
     }
     
-    //Button action functions
-    
     @objc func propMale(){
         buttonMale.backgroundColor = UIColor(red: 60/255, green: 148/255, blue: 223/255, alpha: 1.0)
         buttonFemale.backgroundColor = UIColor(red: 253/255, green: 187/255, blue: 211/255, alpha: 1.0)
@@ -211,7 +209,7 @@ class viewGender: UIViewController {
         gender = "Female"
     }
     
-    //Mark:- Save data to defaults and go to next
+    //Save data to defaults and go to next
     
     @objc func getNext(){
         let data = UserDefaults.standard
@@ -228,6 +226,7 @@ class viewGender: UIViewController {
             navigationController?.pushViewController(vc, animated: true)
         }
     }
+    
     // MARK: - Navigation Bar Setup
     
     func setupNavigationBar() {
@@ -238,5 +237,4 @@ class viewGender: UIViewController {
     @objc func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
-    
 }

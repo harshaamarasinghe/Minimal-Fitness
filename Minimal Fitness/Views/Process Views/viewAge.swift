@@ -2,11 +2,11 @@ import UIKit
 
 class viewAge: UIViewController {
     
-    //Mark:- Variables
+    //MARK: Variables
     
     var age : Int = 0
     
-    //Mark:- UI Components
+    //MARK: UI Components
     
     let progressView : UIProgressView = {
         let progressView = UIProgressView(progressViewStyle: .bar)
@@ -105,7 +105,7 @@ class viewAge: UIViewController {
         setupUI()
     }
     
-    //Mark:- Functions
+    //MARK: Functions
     
     func setupUI(){
         view.backgroundColor = .white
@@ -121,12 +121,12 @@ class viewAge: UIViewController {
         
         progressView.frame = CGRect(x: (view.frame.size.width)/8, y: 100, width: view.frame.size.width-100, height: 20)
         
-        //Mark:- Button Actions
+        //Button Actions
         
         buttonCont.addTarget(self, action: #selector(getNext), for: .touchUpInside)
         
         
-        //Mark:- Constraints
+        //MARK: Constraints
         
         NSLayoutConstraint.activate([
             labelOne.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -193,7 +193,7 @@ class viewAge: UIViewController {
         view.endEditing(true)
     }
     
-    // MARK: - Navigation Bar Setup
+    //MARK: Navigation Bar Setup
     
     func setupNavigationBar() {
         let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonTapped))
