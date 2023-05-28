@@ -247,7 +247,7 @@ class viewHome: UIViewController {
         
         let data = UserDefaults.standard
         
-        email = data.string(forKey: "emailData")!
+        email = data.string(forKey: "email")!
         
         let userRef = db.collection("users")
         let query = userRef.whereField("email", isEqualTo: email as Any)
