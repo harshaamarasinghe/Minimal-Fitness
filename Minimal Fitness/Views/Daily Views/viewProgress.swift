@@ -152,56 +152,53 @@ class ChartView: UIView {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        
+
         guard let context = UIGraphicsGetCurrentContext() else {
             return
         }
-        
+
         let chartWidth = rect.width
         let chartHeight = rect.height - 20
-        
+
         let columnXPoint = { (column: Int) -> CGFloat in
             let spacing = chartWidth / CGFloat(self.dataEntries.count + 1)
             return CGFloat(column + 1) * spacing
         }
-        
+
         let columnYPoint = { (value: CGFloat) -> CGFloat in
             let maxValue = self.dataEntries.max() ?? 0
             let yScale = (chartHeight - 20) / maxValue
             return chartHeight - value * yScale
         }
-        
+
         // Draw bars for bar chart
         let barWidth: CGFloat = 30
         let barSpacing: CGFloat = 20
         var xPosition: CGFloat = 55
-        
-        for (_, value) in dataEntries.enumerated() {
+
+        for (index, value) in dataEntries.enumerated() {
             let columnHeight = columnYPoint(value)
             let barRect = CGRect(x: xPosition, y: columnHeight, width: barWidth, height: chartHeight - columnHeight)
-            
+
             context.setFillColor(CGColor(red: 255/255, green: 74/255, blue: 23/255, alpha: 1))
             context.fill(barRect)
             context.fillPath()
-            
+
+            // Display value labels
+            // Display value labels
+            let valueLabel = UILabel(frame: CGRect(x: xPosition - barWidth/2, y: columnHeight - 40, width: barWidth, height: 20))
+            valueLabel.font = UIFont.systemFont(ofSize: 12)
+            valueLabel.textColor = .black
+            valueLabel.textAlignment = .center
+            valueLabel.text = "\(Int(value))kg"
+            addSubview(valueLabel)
+
             xPosition += barSpacing + barWidth
         }
-        
-        // Draw line for line chart
-        context.setStrokeColor(UIColor.label.cgColor)
-        context.setLineWidth(2.0)
-        
-        let linePath = UIBezierPath()
-        linePath.move(to: CGPoint(x: columnXPoint(0), y: columnYPoint(dataEntries[0])))
-        
-        for i in 1..<dataEntries.count {
-            let nextPoint = CGPoint(x: columnXPoint(i), y: columnYPoint(dataEntries[i]))
-            linePath.addLine(to: nextPoint)
-        }
-        
-        context.addPath(linePath.cgPath)
-        context.strokePath()
     }
+
+
+
     
     func updateChart(with data: [Double]) {
         dataEntries = data

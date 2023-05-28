@@ -25,7 +25,7 @@ class viewProfile: UIViewController {
     }()
     
     let image: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "profile"))
+        let imageView = UIImageView(image: UIImage(named: "profile-2"))
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -149,7 +149,7 @@ class viewProfile: UIViewController {
     }()
     
     let imageProfile: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "man"))
+        let imageView = UIImageView(image: UIImage(named: "profile"))
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.masksToBounds = true
@@ -191,7 +191,7 @@ class viewProfile: UIViewController {
         view.addSubview(image)
         view.addSubview(labelName)
         
-        //Button Functions
+        //Button Functions        
         
         buttonLogout.addTarget(self, action: #selector(logOut), for: .touchUpInside)
         

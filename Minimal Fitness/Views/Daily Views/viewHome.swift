@@ -54,7 +54,7 @@ class viewHome: UIViewController {
     }()
     
     let imageProfile: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "man"))
+        let imageView = UIImageView(image: UIImage(named: "profile"))
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.masksToBounds = true
