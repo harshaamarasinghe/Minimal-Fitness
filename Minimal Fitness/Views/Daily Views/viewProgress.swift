@@ -199,7 +199,7 @@ class ChartView: UIView {
             monthLabel.font = UIFont.systemFont(ofSize: 12)
             monthLabel.textColor = .black
             monthLabel.textAlignment = .center
-            monthLabel.text = monthLabels[index] // Set the month label from the array
+            monthLabel.text = monthLabels[index]
             //addSubview(monthLabel)
             
             xPosition += barSpacing + barWidth
@@ -212,5 +212,3 @@ class ChartView: UIView {
         setNeedsDisplay()
     }
 }
-
-
