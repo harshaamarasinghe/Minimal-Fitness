@@ -87,8 +87,9 @@ class viewProgress: UIViewController {
         chartView = ChartView(frame: CGRect(x: 10, y: 300, width: 400, height: 200))
         chartView.backgroundColor = .white
         let data: [Double] = doubleWeights
+        let monthLabels: [String] = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sep","Oct","Nov","Dec"]
         
-        chartView.updateChart(with: data)
+        chartView.updateChart(with: data, monthLabels: monthLabels)
         view.addSubview(chartView)
         
         chartView.snp.makeConstraints { make in
@@ -149,42 +150,42 @@ class viewProgress: UIViewController {
 class ChartView: UIView {
     
     private var dataEntries: [Double] = []
+    private var monthLabels: [String] = [] // Array to store month labels
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-
+        
         guard let context = UIGraphicsGetCurrentContext() else {
             return
         }
-
+        
         let chartWidth = rect.width
         let chartHeight = rect.height - 20
-
+        
         let columnXPoint = { (column: Int) -> CGFloat in
             let spacing = chartWidth / CGFloat(self.dataEntries.count + 1)
             return CGFloat(column + 1) * spacing
         }
-
+        
         let columnYPoint = { (value: CGFloat) -> CGFloat in
             let maxValue = self.dataEntries.max() ?? 0
             let yScale = (chartHeight - 20) / maxValue
             return chartHeight - value * yScale
         }
-
+        
         // Draw bars for bar chart
         let barWidth: CGFloat = 30
         let barSpacing: CGFloat = 20
         var xPosition: CGFloat = 55
-
+        
         for (index, value) in dataEntries.enumerated() {
             let columnHeight = columnYPoint(value)
             let barRect = CGRect(x: xPosition, y: columnHeight, width: barWidth, height: chartHeight - columnHeight)
-
+            
             context.setFillColor(CGColor(red: 255/255, green: 74/255, blue: 23/255, alpha: 1))
             context.fill(barRect)
             context.fillPath()
-
-            // Display value labels
+            
             // Display value labels
             let valueLabel = UILabel(frame: CGRect(x: xPosition - barWidth/2, y: columnHeight - 40, width: barWidth, height: 20))
             valueLabel.font = UIFont.systemFont(ofSize: 12)
@@ -192,17 +193,24 @@ class ChartView: UIView {
             valueLabel.textAlignment = .center
             valueLabel.text = "\(Int(value))kg"
             addSubview(valueLabel)
-
+            
+            // Display month labels
+            let monthLabel = UILabel(frame: CGRect(x: xPosition - barWidth/2, y: rect.height - 20, width: barWidth, height: 20))
+            monthLabel.font = UIFont.systemFont(ofSize: 12)
+            monthLabel.textColor = .black
+            monthLabel.textAlignment = .center
+            monthLabel.text = monthLabels[index] // Set the month label from the array
+            //addSubview(monthLabel)
+            
             xPosition += barSpacing + barWidth
         }
     }
-
-
-
     
-    func updateChart(with data: [Double]) {
+    func updateChart(with data: [Double], monthLabels: [String]) {
         dataEntries = data
+        self.monthLabels = monthLabels
         setNeedsDisplay()
     }
 }
+
 

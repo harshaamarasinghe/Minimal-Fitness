@@ -146,6 +146,5 @@ class screenOne: UIViewController {
         let vc = signIn()
         navigationController?.pushViewController(vc, animated: true)
     }
-    
 }
 
